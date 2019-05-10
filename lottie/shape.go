@@ -1,25 +1,5 @@
 package lottie
 
-// AnchorPoint Shape Transform Anchor Point
-type AnchorPoint struct {
-}
-
-// Color Fill Color
-type Color struct {
-}
-
-// Copies Number of Copies
-type Copies struct {
-}
-
-// Offset Offset of Copies
-type Offset struct {
-}
-
-// Scale Shape Transform Scale
-type Scale struct {
-}
-
 // Skew Shape Transform Skew
 type Skew struct {
 }
@@ -28,52 +8,20 @@ type Skew struct {
 type SkewAxis struct {
 }
 
-// Start Trim Start.
-type Start struct {
-}
-
 // GradientColors Gradient Colors
 type GradientColors struct {
-}
-
-// HighlightAngle Highlight Angle. Only if type is Radial
-type HighlightAngle struct {
 }
 
 // HighlightLength Gradient Highlight Length. Only if type is Radial
 type HighlightLength struct {
 }
 
-// Radius Rounded Corner Radius
-type Radius struct {
-}
-
-// RoundedCorners Rect's rounded corners
-type RoundedCorners struct {
-}
-
-// Rotation Star's rotation.
-type Rotation struct {
-}
-
 // StarType Star's type. Polygon or Star.
 type StarType struct {
 }
 
-// StartPoint Gradient Start Point
-type StartPoint struct {
-}
-
 // Type Gradient Type
 type Type struct {
-}
-
-// Vertices Shape's vertices
-type Vertices struct {
-}
-
-// Width Stroke Width
-type Width struct {
 }
 
 // InnerRadius Star's inner radius. (Star only)
@@ -157,19 +105,32 @@ type ShapeOrKeyframed struct {
 type ShapeType string
 
 const (
-	ShapeEllipse  ShapeType = "el"
-	ShapeFill     ShapeType = "fl"
-	ShapeGFill    ShapeType = "gf"
-	ShapeGroup    ShapeType = "gr"
-	ShapeGStroke  ShapeType = "gs"
-	ShapeMerge    ShapeType = "mm"
-	ShapeRect     ShapeType = "rc"
+	// ShapeEllipse represents a lottie shapeEllipse.
+	ShapeEllipse ShapeType = "el"
+	// ShapeFill represents a lottie shapeFill.
+	ShapeFill ShapeType = "fl"
+	// ShapeGFill represents a lottie shapeGFill.
+	ShapeGFill ShapeType = "gf"
+	// ShapeGroup represents a lottie shapeGroup.
+	ShapeGroup ShapeType = "gr"
+	// ShapeGStroke represents a lottie shapeGStroke.
+	ShapeGStroke ShapeType = "gs"
+	// ShapeMerge represents a lottie shapeMerge.
+	ShapeMerge ShapeType = "mm"
+	// ShapeRect represents a lottie shapeRect.
+	ShapeRect ShapeType = "rc"
+	// ShapeRepeater represents a lottie shapeRepeater.
 	ShapeRepeater ShapeType = "rp"
-	ShapeRound    ShapeType = "rd"
-	ShapeShape    ShapeType = "sh"
-	ShapeStar     ShapeType = "sr"
-	ShapeStroke   ShapeType = "st"
-	ShapeTrim     ShapeType = "tm"
+	// ShapeRound represents a lottie shapeRound.
+	ShapeRound ShapeType = "rd"
+	// ShapeShape represents a lottie shapeShape.
+	ShapeShape ShapeType = "sh"
+	// ShapeStar represents a lottie shapeStar.
+	ShapeStar ShapeType = "sr"
+	// ShapeStroke represents a lottie shapeStroke.
+	ShapeStroke ShapeType = "st"
+	// ShapeTrim represents a lottie shapeTrim.
+	ShapeTrim ShapeType = "tm"
 )
 
 // Shape represents a lottie shape.

@@ -8,6 +8,10 @@ type Bounds struct {
 	Top    float64 `json:"t"`
 }
 
+// Effect represents a lottie effect.
+type Effect struct {
+}
+
 // ValueOrKeyframed represents either a lottie
 // properties/value or
 // properties/valueKeyframed
@@ -40,6 +44,10 @@ type MultiDimensionalOrKeyframed struct {
 
 	// Out Spatial Tangent. Only for spatial properties. Array of numbers.
 	To []float64 `json:"to,omitempty"`
+}
+
+// TextData represents lottie text data.
+type TextData struct {
 }
 
 // Transform represents a lottie helpers/transform.
@@ -75,13 +83,18 @@ type Transform struct {
 	Sk *ValueOrKeyframed `json:"sk,omitempty"`
 }
 
+// LayerType identifies the type of layer.
 type LayerType int
 
 const (
+	// LayerPreComp is a lottie preComp layer.
 	LayerPreComp LayerType = 0
-	LayerImage   LayerType = 2
-	LayerNull    LayerType = 3
-	LayerShape   LayerType = 4
+	// LayerImage is a lottie image layer.
+	LayerImage LayerType = 2
+	// LayerNull is a lottie null layer.
+	LayerNull LayerType = 3
+	// LayerShape is a lottie shape layer.
+	LayerShape LayerType = 4
 )
 
 // Layer represents a lottie layer.
@@ -104,7 +117,7 @@ type Layer struct {
 	Ddd *float64 `json:"ddd,omitempty"`
 
 	// List of Effects
-	Ef []*EffectsItems `json:"ef,omitempty"`
+	Ef []*Effect `json:"ef,omitempty"`
 
 	// H is a height.
 	H *float64 `json:"h,omitempty"`
@@ -115,8 +128,8 @@ type Layer struct {
 	// Layer index in AE. Used for parenting and expressions.
 	Ind *float64 `json:"ind,omitempty"`
 
-	// In Point of layer. Sets the initial frame of the layer.
-	Ip *float64 `json:"ip,omitempty"`
+	// InPoint of layer. Sets the initial frame of the layer.
+	InPoint *float64 `json:"ip,omitempty"`
 
 	// Transform properties
 	Ks *Transform `json:"ks,omitempty"`
@@ -136,8 +149,8 @@ type Layer struct {
 	// Layer Parent. Uses ind of parent.
 	Parent *float64 `json:"parent,omitempty"`
 
-	// id pointing to the source composition or image defined on 'assets' object
-	RefId *string `json:"refId,omitempty"`
+	// RefID pointing to the source composition or image defined on 'assets' object
+	RefID *string `json:"refId,omitempty"`
 
 	// Layer Time Stretching
 	Sr *float64 `json:"sr,omitempty"`
@@ -179,7 +192,7 @@ type Layer struct {
 	// From layers/text:
 
 	// Text Data
-	T []*TextDataItems `json:"t,omitempty"`
+	T []*TextData `json:"t,omitempty"`
 
 	// From unknown source (LayerType=1):
 

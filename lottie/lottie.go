@@ -5,7 +5,7 @@ import (
 	"io/ioutil"
 )
 
-// Asset
+// Asset represents a lottie asset.
 type Asset struct {
 	// Common to sources/image and sources/precomp:
 
@@ -32,16 +32,11 @@ type Asset struct {
 	Layers []*Layer `json:"layers,omitempty"`
 }
 
-// CharsItems
-type CharsItems struct {
+// Char represents a lottie char.
+type Char struct {
 }
 
-type EffectsItems struct {
-}
-
-type ItemsItems struct {
-}
-
+// Mask represents a lottie mask.
 type Mask struct {
 	// Cl ?
 	Cl *bool `json:"cl,omitempty"`
@@ -65,9 +60,6 @@ type Mask struct {
 	X *ValueOrKeyframed `json:"x,omitempty"`
 }
 
-type TextDataItems struct {
-}
-
 // I Bezier curve interpolation in value.
 type I struct {
 
@@ -78,7 +70,7 @@ type I struct {
 	Y []float64 `json:"y,omitempty"`
 }
 
-// Value
+// Value represents a lottie value.
 type Value struct {
 
 	// Property Index. Used for expressions.
@@ -91,7 +83,7 @@ type Value struct {
 	X *string `json:"x,omitempty"`
 }
 
-// ValueKeyframe
+// ValueKeyframe represents a lottie valueKeyframe.
 type ValueKeyframe struct {
 
 	// Bezier curve interpolation in value.
@@ -104,7 +96,7 @@ type ValueKeyframe struct {
 	T float64 `json:"t,omitempty"`
 }
 
-// ValueKeyframed
+// ValueKeyframed represents a lottie valueKeyframed.
 type ValueKeyframed struct {
 
 	// Property Index. Used for expressions.
@@ -123,7 +115,7 @@ type Animation struct {
 	Assets []*Asset `json:"assets"`
 
 	// source chars for text layers
-	Chars []*CharsItems `json:"chars,omitempty"`
+	Chars []*Char `json:"chars,omitempty"`
 
 	// Composition has 3-D layers (0 or 1).
 	Ddd *int `json:"ddd,omitempty"`
