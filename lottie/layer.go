@@ -106,7 +106,10 @@ type Layer struct {
 	// List of Effects
 	Ef []*EffectsItems `json:"ef,omitempty"`
 
-	// Boolean when layer has a mask. Will be deprecated in favor of checking maskProperties.
+	// H is a height.
+	H *float64 `json:"h,omitempty"`
+
+	// Boolean when layer has a mask. Will be deprecated in favor of checking masksProperties.
 	HasMask *bool `json:"hasMask,omitempty"`
 
 	// Layer index in AE. Used for parenting and expressions.
@@ -122,7 +125,7 @@ type Layer struct {
 	Ln *string `json:"ln,omitempty"`
 
 	// List of Masks
-	MaskProperties []*MaskPropertiesItems `json:"maskProperties,omitempty"`
+	MasksProperties []*Mask `json:"masksProperties,omitempty"`
 
 	// After Effects Layer Name. Used for expressions.
 	Nm *string `json:"nm,omitempty"`
@@ -145,6 +148,9 @@ type Layer struct {
 	// Type of layer.
 	Ty *LayerType `json:"ty,omitempty"`
 
+	// W is a height.
+	W *float64 `json:"w,omitempty"`
+
 	// From layers/shape:
 
 	// Shape list of items
@@ -164,7 +170,7 @@ type Layer struct {
 	// From layers/precomp:
 
 	// Comp's Time remapping
-	Tm *ValueKeyframed `json:"tm,omitempty"`
+	Tm *ValueOrKeyframed `json:"tm,omitempty"`
 
 	// From layers/image:
 

@@ -16,14 +16,6 @@ type Copies struct {
 type Offset struct {
 }
 
-// Opacity Fill Opacity
-type Opacity struct {
-}
-
-// Position Ellipse's position
-type Position struct {
-}
-
 // Scale Shape Transform Scale
 type Scale struct {
 }
@@ -36,16 +28,8 @@ type Skew struct {
 type SkewAxis struct {
 }
 
-// Size Ellipse's size
-type Size struct {
-}
-
 // Start Trim Start.
 type Start struct {
-}
-
-// EndPoint Gradient End Point
-type EndPoint struct {
 }
 
 // GradientColors Gradient Colors
@@ -80,10 +64,6 @@ type StarType struct {
 type StartPoint struct {
 }
 
-// StrokeWidth Gradient Stroke Width
-type StrokeWidth struct {
-}
-
 // Type Gradient Type
 type Type struct {
 }
@@ -116,6 +96,63 @@ type OuterRoundness struct {
 type Points struct {
 }
 
+// ShapeProp represents a lottie properties/shapeProp.
+type ShapeProp struct {
+	// Closed property of shape
+	C *bool `json:"c,omitempty"`
+
+	// Bezier curve In points. Array of 2 dimensional arrays.
+	I [][]float64 `json:"i,omitempty"`
+
+	// Bezier curve Out points. Array of 2 dimensional arrays.
+	O [][]float64 `json:"o,omitempty"`
+
+	// Bezier curve Vertices. Array of 2 dimensional arrays.
+	V [][]float64 `json:"v,omitempty"`
+}
+
+// ShapePropOrKeyframe represents a lottie
+// properties/shapeProp or
+// properties/shapePropKeyframe.
+type ShapePropOrKeyframe struct {
+	ShapeProp
+
+	// Bezier curve interpolation in value.
+	// I *I `json:"i,omitempty"`
+
+	// Bezier curve interpolation out value.
+	// O *O `json:"o,omitempty"`
+
+	// Start value of keyframe segment.
+	S []*ShapeProp `json:"s,omitempty"`
+
+	// Start time of keyframe segment.
+	T float64 `json:"t,omitempty"`
+}
+
+// ShapeOrKeyframed represents a lottie
+// properties/shape or
+// properties/shapeKeyframed.
+type ShapeOrKeyframed struct {
+	// Defines if property is animated
+	A *float64 `json:"a,omitempty"`
+
+	// Property Index. Used for expressions.
+	Ix *string `json:"ix,omitempty"`
+
+	// Property Value or keyframes.
+	K interface{} `json:"k,omitempty"`
+
+	// Property Expression. An AE expression that modifies the value.
+	X *string `json:"x,omitempty"`
+
+	// In Spatial Tangent. Only for spatial properties. Array of numbers.
+	Ti []float64 `json:"ti,omitempty"`
+
+	// Out Spatial Tangent. Only for spatial properties. Array of numbers.
+	To []float64 `json:"to,omitempty"`
+}
+
 // ShapeType represents the type of the shape.
 type ShapeType string
 
@@ -139,6 +176,12 @@ const (
 type Shape struct {
 	// Common to all shapes:
 
+	// Closed property of shape
+	Closed *bool `json:"closed,omitempty"`
+
+	// Fill Color
+	C *MultiDimensionalOrKeyframed `json:"c,omitempty"`
+
 	// After Effect's Match Name. Used for expressions.
 	Mn *string `json:"mn,omitempty"`
 
@@ -146,22 +189,25 @@ type Shape struct {
 	Nm *string `json:"nm,omitempty"`
 
 	// Fill Opacity
-	// CONFLICT: O *Opacity `json:"o,omitempty"`
+	O *ValueOrKeyframed `json:"o,omitempty"`
 
 	// Shape content type.
 	Ty *ShapeType `json:"ty,omitempty"`
 
 	// Highlight Angle. Only if type is Radial
-	// CONFLICT: A *HighlightAngle `json:"a,omitempty"`
+	A *MultiDimensionalOrKeyframed `json:"a,omitempty"`
 
 	// Gradient or trim End Point
-	E *EndPoint `json:"e,omitempty"`
+	// CONFLICT: E *EndPoint `json:"e,omitempty"`
 
 	// Gradient Colors
 	G *GradientColors `json:"g,omitempty"`
 
 	// Gradient Highlight Length. Only if type is Radial
 	H *HighlightLength `json:"h,omitempty"`
+
+	// Layer index in AE. Used for parenting and expressions.
+	Ind *float64 `json:"ind,omitempty"`
 
 	// Gradient Type
 	T *Type `json:"t,omitempty"`
@@ -170,7 +216,7 @@ type Shape struct {
 	D *float64 `json:"d,omitempty"`
 
 	// Shape's position
-	P *Position `json:"p,omitempty"`
+	P *MultiDimensionalOrKeyframed `json:"p,omitempty"`
 
 	// Gradient or Stroke Line Cap
 	Lc *float64 `json:"lc,omitempty"`
@@ -182,17 +228,17 @@ type Shape struct {
 	Ml *float64 `json:"ml,omitempty"`
 
 	// Gradient or Stroke Width
-	W *StrokeWidth `json:"w,omitempty"`
+	W *ValueOrKeyframed `json:"w,omitempty"`
+
+	// Shape's size
+	S *MultiDimensionalOrKeyframed `json:"s,omitempty"`
 
 	// From shapes/ellipse:
 
-	// Ellipse's size
-	// CONFLICT: S *Size `json:"s,omitempty"`
-
 	// From shapes/fill:
 
-	// Fill Color
-	// CONFLICT: C *Color `json:"c,omitempty"`
+	// FillEnabled is whether the fill is enabled.
+	FillEnabled *bool `json:"fillEnabled,omitempty"`
 
 	// From shapes/gFill:
 
@@ -247,7 +293,7 @@ type Shape struct {
 	// From shapes/shape:
 
 	// Shape's vertices
-	Ks *Vertices `json:"ks,omitempty"`
+	Ks *ShapeOrKeyframed `json:"ks,omitempty"`
 
 	// From shapes/star:
 
@@ -289,7 +335,7 @@ type Shape struct {
 	// CONFLICT: O *Opacity `json:"o,omitempty"`
 
 	// Shape Transform Rotation
-	// CONFLICT: R *Rotation `json:"r,omitempty"`
+	R *ValueOrKeyframed `json:"r,omitempty"`
 
 	// Shape Transform Scale
 	// CONFLICT: S *Scale `json:"s,omitempty"`
@@ -303,7 +349,7 @@ type Shape struct {
 	// From shapes/trim:
 
 	// Trim End.
-	// CONFLICT? E *End `json:"e,omitempty"`
+	E *ValueOrKeyframed `json:"e,omitempty"`
 
 	// Trim Offset.
 	// CONFLICT: O *Offset `json:"o,omitempty"`

@@ -5,8 +5,8 @@ import (
 	"io/ioutil"
 )
 
-// AssetsItems
-type AssetsItems struct {
+// Asset
+type Asset struct {
 	// Common to sources/image and sources/precomp:
 
 	// ID is the image or precomp ID.
@@ -42,7 +42,27 @@ type EffectsItems struct {
 type ItemsItems struct {
 }
 
-type MaskPropertiesItems struct {
+type Mask struct {
+	// Cl ?
+	Cl *bool `json:"cl,omitempty"`
+
+	// Inverted Mask flag
+	Inv *bool `json:"inv,omitempty"`
+
+	// Mask mode. Not all mask types are supported.
+	Mode *string `json:"mode,omitempty"`
+
+	// Mask name. Used for expressions and effects.
+	Nm *string `json:"nm,omitempty"`
+
+	// Mask opacity.
+	O *ValueOrKeyframed `json:"o,omitempty"`
+
+	// Mask vertices
+	Pt *ShapeOrKeyframed `json:"pt,omitempty"`
+
+	// X
+	X *ValueOrKeyframed `json:"x,omitempty"`
 }
 
 type TextDataItems struct {
@@ -100,7 +120,7 @@ type ValueKeyframed struct {
 // Animation represents a Lottie animation JSON blob.
 type Animation struct {
 	// source items that can be used in multiple places. Comps and Images for now.
-	Assets []*AssetsItems `json:"assets,omitempty"`
+	Assets []*Asset `json:"assets"`
 
 	// source chars for text layers
 	Chars []*CharsItems `json:"chars,omitempty"`
