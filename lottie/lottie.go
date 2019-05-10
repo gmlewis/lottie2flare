@@ -29,7 +29,7 @@ type AssetsItems struct {
 	// From sources/precomp:
 
 	// List of Precomp Layers
-	Layers []*LayersItems `json:"layers,omitempty"`
+	Layers []*Layer `json:"layers,omitempty"`
 }
 
 // CharsItems
@@ -45,101 +45,49 @@ type ItemsItems struct {
 type MaskPropertiesItems struct {
 }
 
+type ShapeItems struct {
+}
+
 type TextDataItems struct {
 }
 
 type Transform struct {
 }
 
-type LayerType int
+// I Bezier curve interpolation in value.
+type I struct {
 
-// LayersItems
-type LayersItems struct {
-	// Common fields:
+	// bezier x axis
+	X []float64 `json:"x,omitempty"`
 
-	// Auto-Orient along path AE property.
-	Ao *float64 `json:"ao,omitempty"`
+	// bezier y axis
+	Y []float64 `json:"y,omitempty"`
+}
 
-	// Blend Mode
-	Bm *float64 `json:"bm,omitempty"`
+// ValueKeyframe
+type ValueKeyframe struct {
 
-	// Parsed layer name used as html class on SVG/HTML renderer
-	Cl *string `json:"cl,omitempty"`
+	// Bezier curve interpolation in value.
+	I *I `json:"i,omitempty"`
 
-	// 3d layer flag
-	Ddd *float64 `json:"ddd,omitempty"`
+	// Start value of keyframe segment.
+	S []float64 `json:"s,omitempty"`
 
-	// List of Effects
-	Ef []*EffectsItems `json:"ef,omitempty"`
+	// Start time of keyframe segment.
+	T float64 `json:"t,omitempty"`
+}
 
-	// Boolean when layer has a mask. Will be deprecated in favor of checking maskProperties.
-	HasMask *float64 `json:"hasMask,omitempty"`
+// ValueKeyframed
+type ValueKeyframed struct {
 
-	// Layer index in AE. Used for parenting and expressions.
-	Ind *float64 `json:"ind,omitempty"`
+	// Property Index. Used for expressions.
+	Ix *string `json:"ix,omitempty"`
 
-	// In Point of layer. Sets the initial frame of the layer.
-	Ip *float64 `json:"ip,omitempty"`
+	// Property Value keyframes
+	K []*ValueKeyframe `json:"k,omitempty"`
 
-	// Transform properties
-	Ks *Transform `json:"ks,omitempty"`
-
-	// Parsed layer name used as html id on SVG/HTML renderer
-	Ln *string `json:"ln,omitempty"`
-
-	// List of Masks
-	MaskProperties []*MaskPropertiesItems `json:"maskProperties,omitempty"`
-
-	// After Effects Layer Name. Used for expressions.
-	Nm *float64 `json:"nm,omitempty"`
-
-	// Out Point of layer. Sets the final frame of the layer.
-	Op *float64 `json:"op,omitempty"`
-
-	// Layer Parent. Uses ind of parent.
-	Parent *float64 `json:"parent,omitempty"`
-
-	// id pointing to the source composition or image defined on 'assets' object
-	RefId *string `json:"refId,omitempty"`
-
-	// Layer Time Stretching
-	Sr *float64 `json:"sr,omitempty"`
-
-	// Start Time of layer. Sets the start time of the layer.
-	St *float64 `json:"st,omitempty"`
-
-	// Type of layer.
-	Ty *LayerType `json:"ty,omitempty"`
-
-	// From layers/shape:
-
-	// Shape list of items
-	It []*ItemsItems `json:"it,omitempty"`
-
-	// From layers/solid:
-
-	// Color of the solid in hex
-	Sc *string `json:"sc,omitempty"`
-
-	// Height of the solid.
-	Sh *float64 `json:"sh,omitempty"`
-
-	// Width of the solid.
-	Sw *float64 `json:"sw,omitempty"`
-
-	// From layers/precomp:
-
-	// Comp's Time remapping
-	Tm *float64 `json:"tm,omitempty"`
-
-	// From layers/image:
-
-	// From layers/null:
-
-	// From layers/text:
-
-	// Text Data
-	T []*TextDataItems `json:"t,omitempty"`
+	// Property Expression. An AE expression that modifies the value.
+	X *string `json:"x,omitempty"`
 }
 
 // Animation represents a Lottie animation JSON blob.
@@ -163,7 +111,7 @@ type Animation struct {
 	InPoint *float64 `json:"ip,omitempty"`
 
 	// List of Composition Layers
-	Layers []*LayersItems `json:"layers,omitempty"`
+	Layers []*Layer `json:"layers,omitempty"`
 
 	// Composition name
 	Name *string `json:"nm,omitempty"`
