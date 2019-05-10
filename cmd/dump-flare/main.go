@@ -1,4 +1,4 @@
-// dump-lottie parses a lottie JSON file and dumps it to a file.
+// dump-flare parses a flare JSON file and dumps it to a file.
 // It is used for debugging.
 package main
 
@@ -6,7 +6,7 @@ import (
 	"flag"
 	"log"
 
-	"github.com/gmlewis/lottie2flare/lottie"
+	"github.com/gmlewis/lottie2flare/flare"
 )
 
 var ()
@@ -16,7 +16,7 @@ func main() {
 
 	for _, arg := range flag.Args() {
 		log.Printf("Processing %v ...", arg)
-		anim, err := lottie.NewFile(arg)
+		anim, err := flare.NewFile(arg)
 		check("NewFile(%q): %v", arg, err)
 		err = anim.WriteFile(arg + ".out.json")
 		check("WriteFile(%q): %v", arg+".out.json", err)

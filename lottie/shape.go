@@ -133,7 +133,7 @@ const (
 	ShapeTrim ShapeType = "tm"
 )
 
-// Shape represents a lottie shape/.
+// Shape represents a lottie shape.
 type Shape struct {
 	// Common to all shapes:
 
