@@ -45,13 +45,7 @@ type ItemsItems struct {
 type MaskPropertiesItems struct {
 }
 
-type ShapeItems struct {
-}
-
 type TextDataItems struct {
-}
-
-type Transform struct {
 }
 
 // I Bezier curve interpolation in value.
@@ -62,6 +56,19 @@ type I struct {
 
 	// bezier y axis
 	Y []float64 `json:"y,omitempty"`
+}
+
+// Value
+type Value struct {
+
+	// Property Index. Used for expressions.
+	Ix *string `json:"ix,omitempty"`
+
+	// Property Value
+	K *float64 `json:"k,omitempty"`
+
+	// Property Expression. An AE expression that modifies the value.
+	X *string `json:"x,omitempty"`
 }
 
 // ValueKeyframe

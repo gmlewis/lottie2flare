@@ -1,5 +1,80 @@
 package lottie
 
+// Bounds represents a lottie bounding box.
+type Bounds struct {
+	Bottom float64 `json:"b"`
+	Left   float64 `json:"l"`
+	Right  float64 `json:"r"`
+	Top    float64 `json:"t"`
+}
+
+// ValueOrKeyframed represents either a lottie
+// properties/value or
+// properties/valueKeyframed
+type ValueOrKeyframed struct {
+	// Property Index. Used for expressions.
+	Ix *string `json:"ix,omitempty"`
+
+	// Property value or keyframes
+	K interface{} `json:"k,omitempty"`
+
+	// Property Expression. An AE expression that modifies the value.
+	X *string `json:"x,omitempty"`
+}
+
+// MultiDimensionalOrKeyframed represents either a lottie
+// properties/multiDimensional or
+// properties/multiDimensionalKeyframed
+type MultiDimensionalOrKeyframed struct {
+	// Property Index. Used for expressions.
+	Ix *string `json:"ix,omitempty"`
+
+	// Property value or keyframes
+	K []interface{} `json:"k,omitempty"`
+
+	// Property Expression. An AE expression that modifies the value.
+	X *string `json:"x,omitempty"`
+
+	// In Spatial Tangent. Only for spatial properties. Array of numbers.
+	Ti []float64 `json:"ti,omitempty"`
+
+	// Out Spatial Tangent. Only for spatial properties. Array of numbers.
+	To []float64 `json:"to,omitempty"`
+}
+
+// Transform represents a lottie helpers/transform.
+type Transform struct {
+	// Transform Anchor Point
+	A *MultiDimensionalOrKeyframed `json:"a,omitempty"`
+
+	// Transform Opacity
+	O *ValueOrKeyframed `json:"o,omitempty"`
+
+	// Transform Position
+	P *MultiDimensionalOrKeyframed `json:"p,omitempty"`
+
+	// Transform Position X
+	Px *ValueOrKeyframed `json:"px,omitempty"`
+
+	// Transform Position Y
+	Py *ValueOrKeyframed `json:"py,omitempty"`
+
+	// Transform Position Z
+	Pz *ValueOrKeyframed `json:"pz,omitempty"`
+
+	// Transform Rotation
+	R *ValueOrKeyframed `json:"r,omitempty"`
+
+	// Transform Scale
+	S *MultiDimensionalOrKeyframed `json:"s,omitempty"`
+
+	// Transform Skew Axis
+	Sa *ValueOrKeyframed `json:"sa,omitempty"`
+
+	// Transform Skew
+	Sk *ValueOrKeyframed `json:"sk,omitempty"`
+}
+
 type LayerType int
 
 const (
@@ -18,6 +93,9 @@ type Layer struct {
 
 	// Blend Mode
 	Bm *float64 `json:"bm,omitempty"`
+
+	// Bounds represents a lottie bounding box.
+	Bounds *Bounds `json:"bounds,omitempty"`
 
 	// Parsed layer name used as html class on SVG/HTML renderer
 	Cl *string `json:"cl,omitempty"`
@@ -70,7 +148,7 @@ type Layer struct {
 	// From layers/shape:
 
 	// Shape list of items
-	Shapes []*ShapeItems `json:"shapes,omitempty"`
+	Shapes []*Shape `json:"shapes,omitempty"`
 
 	// From layers/solid:
 
