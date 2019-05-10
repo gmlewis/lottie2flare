@@ -105,35 +105,35 @@ type ShapeOrKeyframed struct {
 type ShapeType string
 
 const (
-	// ShapeEllipse represents a lottie shapeEllipse.
+	// ShapeEllipse represents a lottie shape/ellipse.
 	ShapeEllipse ShapeType = "el"
-	// ShapeFill represents a lottie shapeFill.
+	// ShapeFill represents a lottie shape/fill.
 	ShapeFill ShapeType = "fl"
-	// ShapeGFill represents a lottie shapeGFill.
+	// ShapeGFill represents a lottie shape/gFill.
 	ShapeGFill ShapeType = "gf"
-	// ShapeGroup represents a lottie shapeGroup.
+	// ShapeGroup represents a lottie shape/group.
 	ShapeGroup ShapeType = "gr"
-	// ShapeGStroke represents a lottie shapeGStroke.
+	// ShapeGStroke represents a lottie shape/gStroke.
 	ShapeGStroke ShapeType = "gs"
-	// ShapeMerge represents a lottie shapeMerge.
+	// ShapeMerge represents a lottie shape/merge.
 	ShapeMerge ShapeType = "mm"
-	// ShapeRect represents a lottie shapeRect.
+	// ShapeRect represents a lottie shape/rect.
 	ShapeRect ShapeType = "rc"
-	// ShapeRepeater represents a lottie shapeRepeater.
+	// ShapeRepeater represents a lottie shape/repeater.
 	ShapeRepeater ShapeType = "rp"
-	// ShapeRound represents a lottie shapeRound.
+	// ShapeRound represents a lottie shape/round.
 	ShapeRound ShapeType = "rd"
-	// ShapeShape represents a lottie shapeShape.
+	// ShapeShape represents a lottie shape/shape.
 	ShapeShape ShapeType = "sh"
-	// ShapeStar represents a lottie shapeStar.
+	// ShapeStar represents a lottie shape/star.
 	ShapeStar ShapeType = "sr"
-	// ShapeStroke represents a lottie shapeStroke.
+	// ShapeStroke represents a lottie shape/stroke.
 	ShapeStroke ShapeType = "st"
-	// ShapeTrim represents a lottie shapeTrim.
+	// ShapeTrim represents a lottie shape/trim.
 	ShapeTrim ShapeType = "tm"
 )
 
-// Shape represents a lottie shape.
+// Shape represents a lottie shape/.
 type Shape struct {
 	// Common to all shapes:
 
