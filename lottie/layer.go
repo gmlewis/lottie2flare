@@ -180,4 +180,21 @@ type Layer struct {
 
 	// Text Data
 	T []*TextDataItems `json:"t,omitempty"`
+
+	// From unknown source (LayerType=1):
+
+	// C
+	C *ValueOrKeyframed `json:"c,omitempty"`
+
+	// S
+	S *ValueOrKeyframed `json:"s,omitempty"`
+
+	// Sy
+	Sy []*Layer `json:"sy,omitempty"`
+
+	// Td
+	Td *float64 `json:"td,omitempty"`
+
+	// Tt
+	Tt *float64 `json:"tt,omitempty"`
 }
