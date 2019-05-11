@@ -4,6 +4,7 @@ package convert
 import (
 	"log"
 
+	"github.com/gmlewis/lottie2flare/flare"
 	f "github.com/gmlewis/lottie2flare/flare"
 	"github.com/gmlewis/lottie2flare/lottie"
 )
@@ -73,7 +74,53 @@ func processLayerShape(parentIndex int, layer *lottie.Layer, ab *f.Artboard) {
 	nodeNum := len(ab.Nodes)
 	ab.Nodes = append(ab.Nodes, n)
 
+	for _, shape := range layer.Shapes {
+		switch shape.GetTy() {
+		case lottie.ShapeGroup:
+			processShapeGroup(nodeNum, shape, layer, ab)
+		default:
+			log.Fatalf("lottie shape type %q not yet supported", shape.GetTy())
+		}
+	}
+
 	addKeys(nodeNum, layer, ab)
+}
+
+func processShapeGroup(parentIndex int, shape *lottie.Shape, layer *lottie.Layer, ab *f.Artboard) {
+	items := map[lottie.ShapeType][]*lottie.Shape{}
+	for _, item := range shape.It {
+		ty := item.GetTy()
+		items[ty] = append(items[ty], item)
+	}
+
+	// Process fills
+	for _, fill := range items[lottie.ShapeFill] {
+		n := &f.Node{
+			Color:    getColor(fill.GetC().K),
+			FillRule: ip(1),
+			Name:     sp(fill.GetNm()),
+			Opacity:  fp(getScalar(fill.GetO().K) / 100.0),
+			Parent:   ip(parentIndex),
+			Type:     ntp(f.NodeTypeColorFill),
+		}
+		ab.Nodes = append(ab.Nodes, n)
+	}
+
+	// Process elipses
+}
+
+func getColor(k interface{}) *flare.Color {
+	result := &flare.Color{}
+	switch v := k.(type) {
+	case []interface{}:
+		result[0] = v[0].(float64)
+		result[1] = v[1].(float64)
+		result[2] = v[2].(float64)
+		result[3] = v[3].(float64)
+	default:
+		log.Fatalf("getColor unknown type %T: %v", v, v)
+	}
+	return result
 }
 
 func addKeys(componentNum int, layer *lottie.Layer, ab *f.Artboard) {
@@ -138,6 +185,29 @@ func getKey(k interface{}, key string) float64 {
 	return 0.0
 }
 
+func getKeyVector(k interface{}, key string) []float64 {
+	switch m := k.(type) {
+	case map[string]interface{}:
+		v, ok := m[key]
+		if !ok {
+			log.Fatalf("getKeyVector(%q) missing key", key)
+		}
+		switch val := v.(type) {
+		case []interface{}:
+			var result []float64
+			for _, x := range val {
+				result = append(result, x.(float64))
+			}
+			return result
+		default:
+			log.Fatalf("Unknown getKeyVector(%q) val type %T: %v", key, val, val)
+		}
+	default:
+		log.Fatalf("Unknown getKeyVector(%q) type %T: %v", key, m, m)
+	}
+	return nil
+}
+
 func getKeyE(k interface{}, scaleFactor float64) float64 {
 	return getKey(k, "e") * scaleFactor
 }
@@ -148,6 +218,18 @@ func getKeyS(k interface{}, scaleFactor float64) float64 {
 
 func getKeyT(k interface{}, fps float64) float64 {
 	return getKey(k, "t") / fps
+}
+
+func getScalar(k interface{}) float64 {
+	switch v := k.(type) {
+	case []interface{}:
+		return v[0].(float64)
+	case interface{}:
+		return v.(float64)
+	default:
+		log.Fatalf("getScalar unknown type %T: %v", v, v)
+	}
+	return 0.0
 }
 
 func hasKey(k interface{}, key string) bool {
