@@ -192,6 +192,8 @@ func (t *templateData) addIdent(x *ast.Ident, receiverType, fieldName string) {
 	var zeroValue string
 	var namedStruct = false
 	switch x.String() {
+	case "float64":
+		zeroValue = "0.0"
 	case "int", "int64":
 		zeroValue = "0"
 	case "string":

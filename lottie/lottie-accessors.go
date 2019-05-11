@@ -10,28 +10,28 @@ func (a *Animation) GetDdd() int {
 	return *a.Ddd
 }
 
-// GetFrameRate returns the FrameRate field.
-func (a *Animation) GetFrameRate() *float64 {
-	if a == nil {
-		return nil
+// GetFrameRate returns the FrameRate field if it's non-nil, zero value otherwise.
+func (a *Animation) GetFrameRate() float64 {
+	if a == nil || a.FrameRate == nil {
+		return 0.0
 	}
-	return a.FrameRate
+	return *a.FrameRate
 }
 
-// GetHeight returns the Height field.
-func (a *Animation) GetHeight() *float64 {
-	if a == nil {
-		return nil
+// GetHeight returns the Height field if it's non-nil, zero value otherwise.
+func (a *Animation) GetHeight() float64 {
+	if a == nil || a.Height == nil {
+		return 0.0
 	}
-	return a.Height
+	return *a.Height
 }
 
-// GetInPoint returns the InPoint field.
-func (a *Animation) GetInPoint() *float64 {
-	if a == nil {
-		return nil
+// GetInPoint returns the InPoint field if it's non-nil, zero value otherwise.
+func (a *Animation) GetInPoint() float64 {
+	if a == nil || a.InPoint == nil {
+		return 0.0
 	}
-	return a.InPoint
+	return *a.InPoint
 }
 
 // GetMarkers returns the Markers field if it's non-nil, zero value otherwise.
@@ -50,12 +50,12 @@ func (a *Animation) GetName() string {
 	return *a.Name
 }
 
-// GetOutPoint returns the OutPoint field.
-func (a *Animation) GetOutPoint() *float64 {
-	if a == nil {
-		return nil
+// GetOutPoint returns the OutPoint field if it's non-nil, zero value otherwise.
+func (a *Animation) GetOutPoint() float64 {
+	if a == nil || a.OutPoint == nil {
+		return 0.0
 	}
-	return a.OutPoint
+	return *a.OutPoint
 }
 
 // GetVersion returns the Version field if it's non-nil, zero value otherwise.
@@ -66,20 +66,20 @@ func (a *Animation) GetVersion() string {
 	return *a.Version
 }
 
-// GetWidth returns the Width field.
-func (a *Animation) GetWidth() *float64 {
-	if a == nil {
-		return nil
+// GetWidth returns the Width field if it's non-nil, zero value otherwise.
+func (a *Animation) GetWidth() float64 {
+	if a == nil || a.Width == nil {
+		return 0.0
 	}
-	return a.Width
+	return *a.Width
 }
 
-// GetHeight returns the Height field.
-func (a *Asset) GetHeight() *float64 {
-	if a == nil {
-		return nil
+// GetHeight returns the Height field if it's non-nil, zero value otherwise.
+func (a *Asset) GetHeight() float64 {
+	if a == nil || a.Height == nil {
+		return 0.0
 	}
-	return a.Height
+	return *a.Height
 }
 
 // GetID returns the ID field if it's non-nil, zero value otherwise.
@@ -106,28 +106,28 @@ func (a *Asset) GetURL() string {
 	return *a.URL
 }
 
-// GetWidth returns the Width field.
-func (a *Asset) GetWidth() *float64 {
-	if a == nil {
-		return nil
+// GetWidth returns the Width field if it's non-nil, zero value otherwise.
+func (a *Asset) GetWidth() float64 {
+	if a == nil || a.Width == nil {
+		return 0.0
 	}
-	return a.Width
+	return *a.Width
 }
 
-// GetAo returns the Ao field.
-func (l *Layer) GetAo() *float64 {
-	if l == nil {
-		return nil
+// GetAo returns the Ao field if it's non-nil, zero value otherwise.
+func (l *Layer) GetAo() float64 {
+	if l == nil || l.Ao == nil {
+		return 0.0
 	}
-	return l.Ao
+	return *l.Ao
 }
 
-// GetBm returns the Bm field.
-func (l *Layer) GetBm() *float64 {
-	if l == nil {
-		return nil
+// GetBm returns the Bm field if it's non-nil, zero value otherwise.
+func (l *Layer) GetBm() float64 {
+	if l == nil || l.Bm == nil {
+		return 0.0
 	}
-	return l.Bm
+	return *l.Bm
 }
 
 // GetBounds returns the Bounds field.
@@ -154,12 +154,12 @@ func (l *Layer) GetCl() string {
 	return *l.Cl
 }
 
-// GetDdd returns the Ddd field.
-func (l *Layer) GetDdd() *float64 {
-	if l == nil {
-		return nil
+// GetDdd returns the Ddd field if it's non-nil, zero value otherwise.
+func (l *Layer) GetDdd() float64 {
+	if l == nil || l.Ddd == nil {
+		return 0.0
 	}
-	return l.Ddd
+	return *l.Ddd
 }
 
 // GetEn returns the En field if it's non-nil, zero value otherwise.
@@ -170,12 +170,12 @@ func (l *Layer) GetEn() int {
 	return *l.En
 }
 
-// GetH returns the H field.
-func (l *Layer) GetH() *float64 {
-	if l == nil {
-		return nil
+// GetH returns the H field if it's non-nil, zero value otherwise.
+func (l *Layer) GetH() float64 {
+	if l == nil || l.H == nil {
+		return 0.0
 	}
-	return l.H
+	return *l.H
 }
 
 // GetHasMask returns the HasMask field if it's non-nil, zero value otherwise.
@@ -186,20 +186,20 @@ func (l *Layer) GetHasMask() bool {
 	return *l.HasMask
 }
 
-// GetInd returns the Ind field.
-func (l *Layer) GetInd() *float64 {
-	if l == nil {
-		return nil
+// GetInd returns the Ind field if it's non-nil, zero value otherwise.
+func (l *Layer) GetInd() float64 {
+	if l == nil || l.Ind == nil {
+		return 0.0
 	}
-	return l.Ind
+	return *l.Ind
 }
 
-// GetInPoint returns the InPoint field.
-func (l *Layer) GetInPoint() *float64 {
-	if l == nil {
-		return nil
+// GetInPoint returns the InPoint field if it's non-nil, zero value otherwise.
+func (l *Layer) GetInPoint() float64 {
+	if l == nil || l.InPoint == nil {
+		return 0.0
 	}
-	return l.InPoint
+	return *l.InPoint
 }
 
 // GetIx returns the Ix field if it's non-nil, zero value otherwise.
@@ -242,20 +242,20 @@ func (l *Layer) GetNm() string {
 	return *l.Nm
 }
 
-// GetOp returns the Op field.
-func (l *Layer) GetOp() *float64 {
-	if l == nil {
-		return nil
+// GetOp returns the Op field if it's non-nil, zero value otherwise.
+func (l *Layer) GetOp() float64 {
+	if l == nil || l.Op == nil {
+		return 0.0
 	}
-	return l.Op
+	return *l.Op
 }
 
-// GetParent returns the Parent field.
-func (l *Layer) GetParent() *float64 {
-	if l == nil {
-		return nil
+// GetParent returns the Parent field if it's non-nil, zero value otherwise.
+func (l *Layer) GetParent() float64 {
+	if l == nil || l.Parent == nil {
+		return 0.0
 	}
-	return l.Parent
+	return *l.Parent
 }
 
 // GetRefID returns the RefID field if it's non-nil, zero value otherwise.
@@ -282,44 +282,44 @@ func (l *Layer) GetSc() string {
 	return *l.Sc
 }
 
-// GetSh returns the Sh field.
-func (l *Layer) GetSh() *float64 {
-	if l == nil {
-		return nil
+// GetSh returns the Sh field if it's non-nil, zero value otherwise.
+func (l *Layer) GetSh() float64 {
+	if l == nil || l.Sh == nil {
+		return 0.0
 	}
-	return l.Sh
+	return *l.Sh
 }
 
-// GetSr returns the Sr field.
-func (l *Layer) GetSr() *float64 {
-	if l == nil {
-		return nil
+// GetSr returns the Sr field if it's non-nil, zero value otherwise.
+func (l *Layer) GetSr() float64 {
+	if l == nil || l.Sr == nil {
+		return 0.0
 	}
-	return l.Sr
+	return *l.Sr
 }
 
-// GetSt returns the St field.
-func (l *Layer) GetSt() *float64 {
-	if l == nil {
-		return nil
+// GetSt returns the St field if it's non-nil, zero value otherwise.
+func (l *Layer) GetSt() float64 {
+	if l == nil || l.St == nil {
+		return 0.0
 	}
-	return l.St
+	return *l.St
 }
 
-// GetSw returns the Sw field.
-func (l *Layer) GetSw() *float64 {
-	if l == nil {
-		return nil
+// GetSw returns the Sw field if it's non-nil, zero value otherwise.
+func (l *Layer) GetSw() float64 {
+	if l == nil || l.Sw == nil {
+		return 0.0
 	}
-	return l.Sw
+	return *l.Sw
 }
 
-// GetTd returns the Td field.
-func (l *Layer) GetTd() *float64 {
-	if l == nil {
-		return nil
+// GetTd returns the Td field if it's non-nil, zero value otherwise.
+func (l *Layer) GetTd() float64 {
+	if l == nil || l.Td == nil {
+		return 0.0
 	}
-	return l.Td
+	return *l.Td
 }
 
 // GetTm returns the Tm field.
@@ -330,12 +330,12 @@ func (l *Layer) GetTm() *ValueOrKeyframed {
 	return l.Tm
 }
 
-// GetTt returns the Tt field.
-func (l *Layer) GetTt() *float64 {
-	if l == nil {
-		return nil
+// GetTt returns the Tt field if it's non-nil, zero value otherwise.
+func (l *Layer) GetTt() float64 {
+	if l == nil || l.Tt == nil {
+		return 0.0
 	}
-	return l.Tt
+	return *l.Tt
 }
 
 // GetTy returns the Ty field.
@@ -354,12 +354,12 @@ func (l *Layer) GetV() *ValueOrKeyframed {
 	return l.V
 }
 
-// GetW returns the W field.
-func (l *Layer) GetW() *float64 {
-	if l == nil {
-		return nil
+// GetW returns the W field if it's non-nil, zero value otherwise.
+func (l *Layer) GetW() float64 {
+	if l == nil || l.W == nil {
+		return 0.0
 	}
-	return l.W
+	return *l.W
 }
 
 // GetCl returns the Cl field if it's non-nil, zero value otherwise.
@@ -418,12 +418,12 @@ func (m *Mask) GetX() *ValueOrKeyframed {
 	return m.X
 }
 
-// GetA returns the A field.
-func (m *MultiDimensionalOrKeyframed) GetA() *float64 {
-	if m == nil {
-		return nil
+// GetA returns the A field if it's non-nil, zero value otherwise.
+func (m *MultiDimensionalOrKeyframed) GetA() float64 {
+	if m == nil || m.A == nil {
+		return 0.0
 	}
-	return m.A
+	return *m.A
 }
 
 // GetIx returns the Ix field if it's non-nil, zero value otherwise.
@@ -474,12 +474,12 @@ func (s *Shape) GetClosed() bool {
 	return *s.Closed
 }
 
-// GetD returns the D field.
-func (s *Shape) GetD() *float64 {
-	if s == nil {
-		return nil
+// GetD returns the D field if it's non-nil, zero value otherwise.
+func (s *Shape) GetD() float64 {
+	if s == nil || s.D == nil {
+		return 0.0
 	}
-	return s.D
+	return *s.D
 }
 
 // GetE returns the E field.
@@ -522,12 +522,12 @@ func (s *Shape) GetHd() bool {
 	return *s.Hd
 }
 
-// GetInd returns the Ind field.
-func (s *Shape) GetInd() *float64 {
-	if s == nil {
-		return nil
+// GetInd returns the Ind field if it's non-nil, zero value otherwise.
+func (s *Shape) GetInd() float64 {
+	if s == nil || s.Ind == nil {
+		return 0.0
 	}
-	return s.Ind
+	return *s.Ind
 }
 
 // GetIr returns the Ir field.
@@ -562,44 +562,44 @@ func (s *Shape) GetKs() *ShapeOrKeyframed {
 	return s.Ks
 }
 
-// GetLc returns the Lc field.
-func (s *Shape) GetLc() *float64 {
-	if s == nil {
-		return nil
+// GetLc returns the Lc field if it's non-nil, zero value otherwise.
+func (s *Shape) GetLc() float64 {
+	if s == nil || s.Lc == nil {
+		return 0.0
 	}
-	return s.Lc
+	return *s.Lc
 }
 
-// GetLj returns the Lj field.
-func (s *Shape) GetLj() *float64 {
-	if s == nil {
-		return nil
+// GetLj returns the Lj field if it's non-nil, zero value otherwise.
+func (s *Shape) GetLj() float64 {
+	if s == nil || s.Lj == nil {
+		return 0.0
 	}
-	return s.Lj
+	return *s.Lj
 }
 
-// GetM returns the M field.
-func (s *Shape) GetM() *float64 {
-	if s == nil {
-		return nil
+// GetM returns the M field if it's non-nil, zero value otherwise.
+func (s *Shape) GetM() float64 {
+	if s == nil || s.M == nil {
+		return 0.0
 	}
-	return s.M
+	return *s.M
 }
 
-// GetMl returns the Ml field.
-func (s *Shape) GetMl() *float64 {
-	if s == nil {
-		return nil
+// GetMl returns the Ml field if it's non-nil, zero value otherwise.
+func (s *Shape) GetMl() float64 {
+	if s == nil || s.Ml == nil {
+		return 0.0
 	}
-	return s.Ml
+	return *s.Ml
 }
 
-// GetMm returns the Mm field.
-func (s *Shape) GetMm() *float64 {
-	if s == nil {
-		return nil
+// GetMm returns the Mm field if it's non-nil, zero value otherwise.
+func (s *Shape) GetMm() float64 {
+	if s == nil || s.Mm == nil {
+		return 0.0
 	}
-	return s.Mm
+	return *s.Mm
 }
 
 // GetMn returns the Mn field if it's non-nil, zero value otherwise.
@@ -618,12 +618,12 @@ func (s *Shape) GetNm() string {
 	return *s.Nm
 }
 
-// GetNp returns the Np field.
-func (s *Shape) GetNp() *float64 {
-	if s == nil {
-		return nil
+// GetNp returns the Np field if it's non-nil, zero value otherwise.
+func (s *Shape) GetNp() float64 {
+	if s == nil || s.Np == nil {
+		return 0.0
 	}
-	return s.Np
+	return *s.Np
 }
 
 // GetO returns the O field.
@@ -730,12 +730,12 @@ func (s *Shape) GetW() *ValueOrKeyframed {
 	return s.W
 }
 
-// GetA returns the A field.
-func (s *ShapeOrKeyframed) GetA() *float64 {
-	if s == nil {
-		return nil
+// GetA returns the A field if it's non-nil, zero value otherwise.
+func (s *ShapeOrKeyframed) GetA() float64 {
+	if s == nil || s.A == nil {
+		return 0.0
 	}
-	return s.A
+	return *s.A
 }
 
 // GetIx returns the Ix field if it's non-nil, zero value otherwise.
@@ -850,12 +850,12 @@ func (v *Value) GetIx() string {
 	return *v.Ix
 }
 
-// GetK returns the K field.
-func (v *Value) GetK() *float64 {
-	if v == nil {
-		return nil
+// GetK returns the K field if it's non-nil, zero value otherwise.
+func (v *Value) GetK() float64 {
+	if v == nil || v.K == nil {
+		return 0.0
 	}
-	return v.K
+	return *v.K
 }
 
 // GetX returns the X field if it's non-nil, zero value otherwise.
@@ -890,12 +890,12 @@ func (v *ValueKeyframed) GetX() string {
 	return *v.X
 }
 
-// GetA returns the A field.
-func (v *ValueOrKeyframed) GetA() *float64 {
-	if v == nil {
-		return nil
+// GetA returns the A field if it's non-nil, zero value otherwise.
+func (v *ValueOrKeyframed) GetA() float64 {
+	if v == nil || v.A == nil {
+		return 0.0
 	}
-	return v.A
+	return *v.A
 }
 
 // GetIx returns the Ix field if it's non-nil, zero value otherwise.
