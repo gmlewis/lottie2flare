@@ -187,9 +187,9 @@ func (l *Layer) GetHasMask() bool {
 }
 
 // GetInd returns the Ind field if it's non-nil, zero value otherwise.
-func (l *Layer) GetInd() float64 {
+func (l *Layer) GetInd() int {
 	if l == nil || l.Ind == nil {
-		return 0.0
+		return 0
 	}
 	return *l.Ind
 }

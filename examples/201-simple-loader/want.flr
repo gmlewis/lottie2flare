@@ -111,7 +111,7 @@
           "drawOrder": 1,
           "isCollapsed": false,
           "isVisible": true,
-          "name": "Ellipse",
+          "name": "Shape Layer 3",
           "opacity": 1,
           "rotation": 0,
           "scale": [
@@ -119,8 +119,8 @@
             1
           ],
           "translation": [
-            312,
-            384
+            128,
+            100
           ],
           "type": "shape"
         },
@@ -162,7 +162,7 @@
           "drawOrder": 2,
           "isCollapsed": false,
           "isVisible": true,
-          "name": "Ellipse",
+          "name": "Shape Layer 1",
           "opacity": 1,
           "rotation": 0,
           "scale": [
@@ -170,8 +170,8 @@
             1
           ],
           "translation": [
-            512,
-            384
+            99.875,
+            100
           ],
           "type": "shape"
         },
@@ -213,7 +213,7 @@
           "drawOrder": 3,
           "isCollapsed": false,
           "isVisible": true,
-          "name": "Ellipse",
+          "name": "Shape Layer 2",
           "opacity": 1,
           "rotation": 0,
           "scale": [
@@ -221,8 +221,8 @@
             1
           ],
           "translation": [
-            712,
-            384
+            71.75,
+            100
           ],
           "type": "shape"
         },

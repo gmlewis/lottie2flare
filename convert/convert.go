@@ -38,22 +38,43 @@ func Lottie2Flare(anim *lottie.Animation) (*f.Root, error) {
 	}
 
 	for _, layer := range anim.Layers {
-		processLayer(layer, root.Artboards[0].Animations[0])
+		processLayer(-1, layer, root.Artboards[0])
 	}
 
 	return root, nil
 }
 
-func processLayer(layer *lottie.Layer, fa *f.Animation) {
+func processLayer(parentIndex int, layer *lottie.Layer, ab *f.Artboard) {
 	switch layer.GetTy() {
 	case lottie.LayerShape:
-		processLayerShape(layer, fa)
+		processLayerShape(parentIndex, layer, ab)
 	default:
 		log.Fatalf("Lottie shape type %v not yet supported.", layer.GetTy())
 	}
 }
 
-func processLayerShape(layer *lottie.Layer, fa *f.Animation) {
+func processLayerShape(parentIndex int, layer *lottie.Layer, ab *f.Artboard) {
+	n := &f.Node{
+		BlendMode:   bmp(f.BlendModeType3),
+		Clips:       &[]int{},
+		DrawOrder:   ip(layer.GetInd()),
+		IsCollapsed: bp(false),
+		IsVisible:   bp(true),
+		Name:        sp(layer.GetNm()),
+		Opacity:     layer.InitialOpacity(),
+		Rotation:    layer.InitialRotation(),
+		Scale:       layer.InitialScale(),
+		Translation: layer.InitialPosition(),
+		Type:        ntp(f.NodeTypeShape),
+	}
+	if parentIndex >= 0 {
+		n.Parent = ip(parentIndex)
+	}
+	ab.Nodes = append(ab.Nodes, n)
+}
+
+func bmp(v f.BlendModeType) *f.BlendModeType {
+	return &v
 }
 
 func bp(v bool) *bool {
@@ -65,6 +86,10 @@ func fp(v float64) *float64 {
 }
 
 func ip(v int) *int {
+	return &v
+}
+
+func ntp(v f.NodeType) *f.NodeType {
 	return &v
 }
 

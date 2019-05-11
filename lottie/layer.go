@@ -1,5 +1,7 @@
 package lottie
 
+import "log"
+
 // Bounds represents a lottie bounding box.
 type Bounds struct {
 	Bottom float64 `json:"b"`
@@ -128,7 +130,7 @@ type Layer struct {
 	HasMask *bool `json:"hasMask,omitempty"`
 
 	// Layer index in AE. Used for parenting and expressions.
-	Ind *float64 `json:"ind,omitempty"`
+	Ind *int `json:"ind,omitempty"`
 
 	// InPoint of layer. Sets the initial frame of the layer.
 	InPoint *float64 `json:"ip,omitempty"`
@@ -224,4 +226,76 @@ type Layer struct {
 
 	// V
 	V *ValueOrKeyframed `json:"v,omitempty"`
+}
+
+// InitialOpacity return's the layer's initial opacity.
+func (l *Layer) InitialOpacity() *float64 {
+	if l.Ks == nil {
+		return nil
+	}
+	v := l.Ks.GetO().GetA()
+	return &v
+}
+
+// InitialRotation return's the layer's initial rotation.
+func (l *Layer) InitialRotation() *float64 {
+	if l.Ks == nil {
+		return nil
+	}
+	v := l.Ks.GetR().GetA()
+	return &v
+}
+
+// InitialScale return's the layer's initial scale.
+func (l *Layer) InitialScale() []float64 {
+	if l.Ks == nil {
+		return nil
+	}
+	switch v := l.Ks.GetS().K.(type) {
+	case []interface{}:
+		result := []float64{1, 1}
+		switch x := v[0].(type) {
+		case float64:
+			result[0] = x / 100.0
+		default:
+			log.Fatalf("Unknown layer.Ks.S[0] type %T: %v", x, x)
+		}
+		switch y := v[1].(type) {
+		case float64:
+			result[1] = y / 100.0
+		default:
+			log.Fatalf("Unknown layer.Ks.S[1] type %T: %v", y, y)
+		}
+		return result
+	default:
+		log.Fatalf("Unknown layer.Ks.S type %T: %v", v, v)
+	}
+	return nil
+}
+
+// InitialPosition return's the layer's initial position.
+func (l *Layer) InitialPosition() []float64 {
+	if l.Ks == nil {
+		return nil
+	}
+	switch v := l.Ks.GetP().K.(type) {
+	case []interface{}:
+		result := []float64{1, 1}
+		switch x := v[0].(type) {
+		case float64:
+			result[0] = x
+		default:
+			log.Fatalf("Unknown layer.Ks.P[0] type %T: %v", x, x)
+		}
+		switch y := v[1].(type) {
+		case float64:
+			result[1] = y
+		default:
+			log.Fatalf("Unknown layer.Ks.P[1] type %T: %v", y, y)
+		}
+		return result
+	default:
+		log.Fatalf("Unknown layer.Ks.P type %T: %v", v, v)
+	}
+	return nil
 }

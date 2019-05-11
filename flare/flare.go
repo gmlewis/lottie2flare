@@ -71,6 +71,10 @@ type Color [4]float64
 // BlendModeType controls the blend mode of the node.
 type BlendModeType int
 
+const (
+	BlendModeType3 BlendModeType = 3
+)
+
 // Bone represents a flare bone.
 type Bone struct {
 }
