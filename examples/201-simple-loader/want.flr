@@ -15,22 +15,22 @@
                 [
                   {
                     "interpolatorType": 1,
-                    "time": 0,
+                    "time": 0.24,
                     "value": 0
                   },
                   {
                     "interpolatorType": 1,
-                    "time": 0.12,
-                    "value": 1
-                  },
-                  {
-                    "interpolatorType": 1,
-                    "time": 0.24,
-                    "value": 1
-                  },
-                  {
-                    "interpolatorType": 1,
                     "time": 0.36,
+                    "value": 1
+                  },
+                  {
+                    "interpolatorType": 1,
+                    "time": 0.48,
+                    "value": 1
+                  },
+                  {
+                    "interpolatorType": 1,
+                    "time": 0.6,
                     "value": 0
                   }
                 ]
@@ -69,22 +69,22 @@
                 [
                   {
                     "interpolatorType": 1,
-                    "time": 0.24,
+                    "time": 0,
                     "value": 0
                   },
                   {
                     "interpolatorType": 1,
+                    "time": 0.12,
+                    "value": 1
+                  },
+                  {
+                    "interpolatorType": 1,
+                    "time": 0.24,
+                    "value": 1
+                  },
+                  {
+                    "interpolatorType": 1,
                     "time": 0.36,
-                    "value": 1
-                  },
-                  {
-                    "interpolatorType": 1,
-                    "time": 0.48,
-                    "value": 1
-                  },
-                  {
-                    "interpolatorType": 1,
-                    "time": 0.6,
                     "value": 0
                   }
                 ]

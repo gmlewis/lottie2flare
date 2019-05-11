@@ -72,7 +72,7 @@ type Color [4]float64
 type BlendModeType int
 
 const (
-	BlendModeType3 BlendModeType = 3
+	BlendModeType3 BlendModeType = 3 // TODO: figure these out.
 )
 
 // Bone represents a flare bone.
@@ -81,6 +81,10 @@ type Bone struct {
 
 // InterpolatorType controls the type of interpolation used by a key.
 type InterpolatorType int
+
+const (
+	InterpolatorType1 InterpolatorType = 1 // TODO: figure these out.
+)
 
 // Key represents an animation key in flare.
 type Key struct {

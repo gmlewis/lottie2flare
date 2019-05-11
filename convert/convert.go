@@ -70,7 +70,95 @@ func processLayerShape(parentIndex int, layer *lottie.Layer, ab *f.Artboard) {
 	if parentIndex >= 0 {
 		n.Parent = ip(parentIndex)
 	}
+	nodeNum := len(ab.Nodes)
 	ab.Nodes = append(ab.Nodes, n)
+
+	addKeys(nodeNum, layer, ab)
+}
+
+func addKeys(componentNum int, layer *lottie.Layer, ab *f.Artboard) {
+	lastAnim := ab.Animations[len(ab.Animations)-1]
+	keyed := &f.Key{
+		Component: ip(componentNum),
+	}
+
+	if o := layer.Ks.GetO(); o != nil {
+		switch v := o.K.(type) {
+		case []interface{}:
+			keyed.Opacity = [][]*f.KeyNode{getKeys(v, *lastAnim.FPS, 1.0/100.0)}
+		default:
+			log.Fatalf("Unknown layer.Ks.O.K type %T: %v", v, v)
+		}
+	}
+
+	lastAnim.Keyed = append(lastAnim.Keyed, keyed)
+}
+
+func getKeys(ks []interface{}, fps, scaleFactor float64) (result []*f.KeyNode) {
+	lastEnd := 0.0
+	for _, k := range ks {
+		t := getKeyT(k, fps)
+		if hasKey(k, "s") && hasKey(k, "e") {
+			s := getKeyS(k, scaleFactor)
+			lastEnd = getKeyE(k, scaleFactor)
+			result = append(result, &f.KeyNode{
+				InterpolatorType: itp(f.InterpolatorType1),
+				Time:             fp(t),
+				Value:            fp(s),
+			})
+		} else { // final key
+			result = append(result, &f.KeyNode{
+				InterpolatorType: itp(f.InterpolatorType1),
+				Time:             fp(t),
+				Value:            fp(lastEnd),
+			})
+		}
+	}
+	return result
+}
+
+func getKey(k interface{}, key string) float64 {
+	switch m := k.(type) {
+	case map[string]interface{}:
+		v, ok := m[key]
+		if !ok {
+			log.Fatalf("getKey(%q) missing key", key)
+		}
+		switch val := v.(type) {
+		case []interface{}:
+			return val[0].(float64)
+		case interface{}:
+			return val.(float64)
+		default:
+			log.Fatalf("Unknown getKey(%q) val type %T: %v", key, val, val)
+		}
+	default:
+		log.Fatalf("Unknown getKey(%q) type %T: %v", key, m, m)
+	}
+	return 0.0
+}
+
+func getKeyE(k interface{}, scaleFactor float64) float64 {
+	return getKey(k, "e") * scaleFactor
+}
+
+func getKeyS(k interface{}, scaleFactor float64) float64 {
+	return getKey(k, "s") * scaleFactor
+}
+
+func getKeyT(k interface{}, fps float64) float64 {
+	return getKey(k, "t") / fps
+}
+
+func hasKey(k interface{}, key string) bool {
+	switch v := k.(type) {
+	case map[string]interface{}:
+		_, ok := v[key]
+		return ok
+	default:
+		log.Fatalf("Unknown hasKey(%q) type %T: %v", key, v, v)
+	}
+	return false
 }
 
 func bmp(v f.BlendModeType) *f.BlendModeType {
@@ -86,6 +174,10 @@ func fp(v float64) *float64 {
 }
 
 func ip(v int) *int {
+	return &v
+}
+
+func itp(v f.InterpolatorType) *f.InterpolatorType {
 	return &v
 }
 

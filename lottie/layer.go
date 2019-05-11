@@ -258,17 +258,17 @@ func (l *Layer) InitialScale() []float64 {
 		case float64:
 			result[0] = x / 100.0
 		default:
-			log.Fatalf("Unknown layer.Ks.S[0] type %T: %v", x, x)
+			log.Fatalf("Unknown layer.Ks.S.K[0] type %T: %v", x, x)
 		}
 		switch y := v[1].(type) {
 		case float64:
 			result[1] = y / 100.0
 		default:
-			log.Fatalf("Unknown layer.Ks.S[1] type %T: %v", y, y)
+			log.Fatalf("Unknown layer.Ks.S.K[1] type %T: %v", y, y)
 		}
 		return result
 	default:
-		log.Fatalf("Unknown layer.Ks.S type %T: %v", v, v)
+		log.Fatalf("Unknown layer.Ks.S.K type %T: %v", v, v)
 	}
 	return nil
 }
@@ -285,17 +285,17 @@ func (l *Layer) InitialPosition() []float64 {
 		case float64:
 			result[0] = x
 		default:
-			log.Fatalf("Unknown layer.Ks.P[0] type %T: %v", x, x)
+			log.Fatalf("Unknown layer.Ks.P.K[0] type %T: %v", x, x)
 		}
 		switch y := v[1].(type) {
 		case float64:
 			result[1] = y
 		default:
-			log.Fatalf("Unknown layer.Ks.P[1] type %T: %v", y, y)
+			log.Fatalf("Unknown layer.Ks.P.K[1] type %T: %v", y, y)
 		}
 		return result
 	default:
-		log.Fatalf("Unknown layer.Ks.P type %T: %v", v, v)
+		log.Fatalf("Unknown layer.Ks.P.K type %T: %v", v, v)
 	}
 	return nil
 }
