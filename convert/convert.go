@@ -31,7 +31,7 @@ func Lottie2Flare(anim *lottie.Animation) (*f.Root, error) {
 						FPS:            fp(anim.GetFrameRate()),
 						Duration:       fp(anim.GetOutPoint() / anim.GetFrameRate()),
 						IsLooping:      bp(true),
-						Name:           sp("go"),
+						Name:           sp("idle"),
 					},
 				},
 			},
