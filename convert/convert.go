@@ -2,6 +2,8 @@
 package convert
 
 import (
+	"log"
+
 	f "github.com/gmlewis/lottie2flare/flare"
 	"github.com/gmlewis/lottie2flare/lottie"
 )
@@ -34,7 +36,24 @@ func Lottie2Flare(anim *lottie.Animation) (*f.Root, error) {
 			},
 		},
 	}
+
+	for _, layer := range anim.Layers {
+		processLayer(layer, root.Artboards[0].Animations[0])
+	}
+
 	return root, nil
+}
+
+func processLayer(layer *lottie.Layer, fa *f.Animation) {
+	switch layer.GetTy() {
+	case lottie.LayerShape:
+		processLayerShape(layer, fa)
+	default:
+		log.Fatalf("Lottie shape type %v not yet supported.", layer.GetTy())
+	}
+}
+
+func processLayerShape(layer *lottie.Layer, fa *f.Animation) {
 }
 
 func bp(v bool) *bool {

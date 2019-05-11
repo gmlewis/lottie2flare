@@ -338,12 +338,12 @@ func (l *Layer) GetTt() float64 {
 	return *l.Tt
 }
 
-// GetTy returns the Ty field.
-func (l *Layer) GetTy() *LayerType {
-	if l == nil {
-		return nil
+// GetTy returns the Ty field if it's non-nil, zero value otherwise.
+func (l *Layer) GetTy() LayerType {
+	if l == nil || l.Ty == nil {
+		return 0
 	}
-	return l.Ty
+	return *l.Ty
 }
 
 // GetV returns the V field.
@@ -714,12 +714,12 @@ func (s *Shape) GetTr() *Transform {
 	return s.Tr
 }
 
-// GetTy returns the Ty field.
-func (s *Shape) GetTy() *ShapeType {
-	if s == nil {
-		return nil
+// GetTy returns the Ty field if it's non-nil, zero value otherwise.
+func (s *Shape) GetTy() ShapeType {
+	if s == nil || s.Ty == nil {
+		return ""
 	}
-	return s.Ty
+	return *s.Ty
 }
 
 // GetW returns the W field.
