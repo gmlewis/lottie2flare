@@ -12,6 +12,7 @@
 # jq -S . < examples/1370-confetti/1370-confetti.json > examples/1370-confetti/out.json
 # jq -S . < examples/1798-check-animation/1798-check-animation.json > examples/1798-check-animation/out.json
 # jq -S . < examples/196-material-wave-loading/196-material-wave-loading.json > examples/196-material-wave-loading/out.json
+# jq -S . < examples/201-simple-loader/201-simple-loader.json > examples/201-simple-loader/out.json
 # jq -S . < examples/257-favorie/257-favorie.json > examples/257-favorie/out.json
 # jq -S . < examples/27-loading/27-loading.json > examples/27-loading/out.json
 # jq -S . < examples/29-motorcycle/29-motorcycle.json > examples/29-motorcycle/out.json
@@ -35,6 +36,7 @@ go run cmd/dump-lottie/main.go \
   examples/1370-confetti/1370-confetti.json \
   examples/1798-check-animation/1798-check-animation.json \
   examples/196-material-wave-loading/196-material-wave-loading.json \
+  examples/201-simple-loader/201-simple-loader.json \
   examples/257-favorie/257-favorie.json \
   examples/27-loading/27-loading.json \
   examples/29-motorcycle/29-motorcycle.json \
@@ -78,6 +80,9 @@ diff -q examples/1798-check-animation/out.json examples/1798-check-animation/dat
 
 jq -S . < examples/196-material-wave-loading/196-material-wave-loading.json.out.json > examples/196-material-wave-loading/data.out.json
 diff -q examples/196-material-wave-loading/out.json examples/196-material-wave-loading/data.out.json
+
+jq -S . < examples/201-simple-loader/201-simple-loader.json.out.json > examples/201-simple-loader/data.out.json
+diff -q examples/201-simple-loader/out.json examples/201-simple-loader/data.out.json
 
 jq -S . < examples/257-favorie/257-favorie.json.out.json > examples/257-favorie/data.out.json
 diff -q examples/257-favorie/out.json examples/257-favorie/data.out.json
