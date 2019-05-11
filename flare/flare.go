@@ -182,6 +182,9 @@ type Node struct {
 	// FillRule is a fill rule.
 	FillRule *int `json:"fillRule,omitempty"`
 
+	// Height is a height value.
+	Height *float64 `json:"height,omitempty"`
+
 	// IsClosed controls the closed state of the node.
 	IsClosed *bool `json:"isClosed,omitempty"`
 
