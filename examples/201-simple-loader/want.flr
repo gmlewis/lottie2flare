@@ -139,9 +139,9 @@
         },
         {
           "clips": [],
-          "height": 50,
+          "height": 14.963,
           "isCollapsed": false,
-          "name": "Ellipse Path",
+          "name": "Ellipse Path 1",
           "opacity": 1,
           "parent": 0,
           "rotation": 0,
@@ -154,7 +154,7 @@
             0
           ],
           "type": "ellipse",
-          "width": 50
+          "width": 14.963
         },
         {
           "blendMode": 3,
@@ -190,9 +190,9 @@
         },
         {
           "clips": [],
-          "height": 50,
+          "height": 14.963,
           "isCollapsed": false,
-          "name": "Ellipse Path",
+          "name": "Ellipse Path 1",
           "opacity": 1,
           "parent": 3,
           "rotation": 0,
@@ -205,7 +205,7 @@
             0
           ],
           "type": "ellipse",
-          "width": 50
+          "width": 14.963
         },
         {
           "blendMode": 3,
@@ -241,9 +241,9 @@
         },
         {
           "clips": [],
-          "height": 50,
+          "height": 14.963,
           "isCollapsed": false,
-          "name": "Ellipse Path",
+          "name": "Ellipse Path 1",
           "opacity": 1,
           "parent": 6,
           "rotation": 0,
@@ -256,7 +256,7 @@
             0
           ],
           "type": "ellipse",
-          "width": 50
+          "width": 14.963
         }
       ],
       "origin": [

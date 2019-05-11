@@ -145,6 +145,8 @@ const (
 	NodeTypeColorFill NodeType = "colorFill"
 	// NodeTypeColorStroke is a node type.
 	NodeTypeColorStroke NodeType = "colorStroke"
+	// NodeTypeEllipse is a node type.
+	NodeTypeEllipse NodeType = "ellipse"
 	// NodeTypeNode is a node type.
 	NodeTypeNode NodeType = "node"
 	// NodeTypePath is a node type.

@@ -123,6 +123,8 @@ const (
 	ShapeStroke ShapeType = "st"
 	// ShapeTrim represents a lottie shape/trim.
 	ShapeTrim ShapeType = "tm"
+	// ShapeTransform represents a lottie transform.
+	ShapeTransform ShapeType = "tr"
 )
 
 // Shape represents a lottie shape.

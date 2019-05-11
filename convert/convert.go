@@ -106,21 +106,40 @@ func processShapeGroup(parentIndex int, shape *lottie.Shape, layer *lottie.Layer
 		ab.Nodes = append(ab.Nodes, n)
 	}
 
-	// Process elipses
+	tr := items[lottie.ShapeTransform]
+	// Process ellipses
+	for _, ellipse := range items[lottie.ShapeEllipse] {
+		s := getVector(ellipse.GetS().K)
+		p := getVector(ellipse.GetP().K)
+		if len(s) < 2 {
+			log.Fatalf("Bad ellipse S: %#v", s)
+		}
+		n := &f.Node{
+			Clips:       &[]int{},
+			Height:      fp(s[1]),
+			IsCollapsed: bp(false),
+			Name:        sp(ellipse.GetNm()),
+			Parent:      ip(parentIndex),
+			Translation: p,
+			Type:        ntp(f.NodeTypeEllipse),
+			Width:       fp(s[0]),
+		}
+		if len(tr) > 0 {
+			n.Opacity = fp(getScalar(tr[0].GetO().K) / 100.0)
+			n.Rotation = fp(getKey(tr[0].R, "k"))
+			sf := getVector(tr[0].GetS().K)
+			n.Scale = []float64{sf[0] / 100.0, sf[1] / 100.0}
+		}
+		ab.Nodes = append(ab.Nodes, n)
+	}
 }
 
 func getColor(k interface{}) *flare.Color {
-	result := &flare.Color{}
-	switch v := k.(type) {
-	case []interface{}:
-		result[0] = v[0].(float64)
-		result[1] = v[1].(float64)
-		result[2] = v[2].(float64)
-		result[3] = v[3].(float64)
-	default:
-		log.Fatalf("getColor unknown type %T: %v", v, v)
+	v := getVector(k)
+	if len(v) < 4 {
+		log.Fatalf("getColor: bad K vector: %#v", v)
 	}
-	return result
+	return &flare.Color{v[0], v[1], v[2], v[3]}
 }
 
 func addKeys(componentNum int, layer *lottie.Layer, ab *f.Artboard) {
@@ -230,6 +249,18 @@ func getScalar(k interface{}) float64 {
 		log.Fatalf("getScalar unknown type %T: %v", v, v)
 	}
 	return 0.0
+}
+
+func getVector(k interface{}) (result []float64) {
+	switch v := k.(type) {
+	case []interface{}:
+		for _, f := range v {
+			result = append(result, f.(float64))
+		}
+	default:
+		log.Fatalf("getVector unknown type %T: %v", v, v)
+	}
+	return result
 }
 
 func hasKey(k interface{}, key string) bool {
