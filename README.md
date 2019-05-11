@@ -13,6 +13,23 @@ Please see the examples:
 * [gatin](examples/gatin)
 * [happy2016](examples/happy2016)
 * [navidad](examples/navidad)
+* [1055-world-locations](examples/1055-world-locations)
+* [113-muzli-beacon](examples/113-muzli-beacon)
+* [117-progress-bar](examples/117-progress-bar)
+* [1370-confetti](examples/1370-confetti)
+* [1798-check-animation](examples/1798-check-animation)
+* [196-material-wave-loading](examples/196-material-wave-loading)
+* [201-simple-loader](examples/201-simple-loader)
+* [257-favorie](examples/257-favorie)
+* [27-loading](examples/27-loading)
+* [29-motorcycle](examples/29-motorcycle)
+* [40-loading](examples/40-loading)
+* [427-happy-birthday](examples/427-happy-birthday)
+* [433-checked-done](examples/433-checked-done)
+* [51-preloader](examples/51-preloader)
+* [72-favourite-app-icon](examples/72-favourite-app-icon)
+* [77-im-thirsty](examples/77-im-thirsty)
+* [782-check-mark-success](examples/782-check-mark-success)
 
 
 ## Documentation
