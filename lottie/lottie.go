@@ -1,3 +1,6 @@
+//go:generate go run gen-accessors.go
+
+// Package lottie defines the JSON structure of a lottie file.
 package lottie
 
 import (
