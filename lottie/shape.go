@@ -1,13 +1,5 @@
 package lottie
 
-// Skew Shape Transform Skew
-type Skew struct {
-}
-
-// SkewAxis Shape Transform Skew Axis
-type SkewAxis struct {
-}
-
 // GradientColors Gradient Colors
 type GradientColors struct {
 }
@@ -86,7 +78,7 @@ type ShapeOrKeyframed struct {
 	A *float64 `json:"a,omitempty"`
 
 	// Property Index. Used for expressions.
-	Ix *string `json:"ix,omitempty"`
+	Ix *int `json:"ix,omitempty"`
 
 	// Property Value or keyframes.
 	K interface{} `json:"k,omitempty"`
@@ -169,6 +161,9 @@ type Shape struct {
 
 	// Layer index in AE. Used for parenting and expressions.
 	Ind *float64 `json:"ind,omitempty"`
+
+	// Property Index. Used for expressions.
+	Ix *int `json:"ix,omitempty"`
 
 	// Gradient Type
 	T *Type `json:"t,omitempty"`
@@ -296,16 +291,16 @@ type Shape struct {
 	// CONFLICT: O *Opacity `json:"o,omitempty"`
 
 	// Shape Transform Rotation
-	R *ValueOrKeyframed `json:"r,omitempty"`
+	R interface{} `json:"r,omitempty"`
 
 	// Shape Transform Scale
 	// CONFLICT: S *Scale `json:"s,omitempty"`
 
 	// Shape Transform Skew Axis
-	Sa *SkewAxis `json:"sa,omitempty"`
+	Sa *ValueOrKeyframed `json:"sa,omitempty"`
 
 	// Shape Transform Skew
-	Sk *Skew `json:"sk,omitempty"`
+	Sk *ValueOrKeyframed `json:"sk,omitempty"`
 
 	// From shapes/trim:
 
@@ -317,4 +312,12 @@ type Shape struct {
 
 	// Trim Start.
 	// CONFLICT: S *Start `json:"s,omitempty"`
+
+	// From unknown:
+
+	// Cix
+	Cix *int `json:"cix,omitempty"`
+
+	// Hd
+	Hd *bool `json:"hd,omitempty"`
 }

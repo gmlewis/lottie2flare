@@ -132,6 +132,12 @@ type Animation struct {
 	// List of Composition Layers
 	Layers []*Layer `json:"layers,omitempty"`
 
+	// Markers
+	// Note that the pointer to the slice is needed in this
+	// case to preserve the case where an empty list is
+	// in the original flare file.
+	Markers *[]int `json:"markers,omitempty"`
+
 	// Composition name
 	Name *string `json:"nm,omitempty"`
 

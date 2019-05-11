@@ -8,16 +8,15 @@ type Bounds struct {
 	Top    float64 `json:"t"`
 }
 
-// Effect represents a lottie effect.
-type Effect struct {
-}
-
 // ValueOrKeyframed represents either a lottie
 // properties/value or
 // properties/valueKeyframed
 type ValueOrKeyframed struct {
+	// A
+	A *float64 `json:"a,omitempty"`
+
 	// Property Index. Used for expressions.
-	Ix *string `json:"ix,omitempty"`
+	Ix *int `json:"ix,omitempty"`
 
 	// Property value or keyframes
 	K interface{} `json:"k,omitempty"`
@@ -30,11 +29,14 @@ type ValueOrKeyframed struct {
 // properties/multiDimensional or
 // properties/multiDimensionalKeyframed
 type MultiDimensionalOrKeyframed struct {
+	// A
+	A *float64 `json:"a,omitempty"`
+
 	// Property Index. Used for expressions.
-	Ix *string `json:"ix,omitempty"`
+	Ix *int `json:"ix,omitempty"`
 
 	// Property value or keyframes
-	K []interface{} `json:"k,omitempty"`
+	K interface{} `json:"k,omitempty"`
 
 	// Property Expression. An AE expression that modifies the value.
 	X *string `json:"x,omitempty"`
@@ -117,7 +119,7 @@ type Layer struct {
 	Ddd *float64 `json:"ddd,omitempty"`
 
 	// List of Effects
-	Ef []*Effect `json:"ef,omitempty"`
+	Ef []*Layer `json:"ef,omitempty"`
 
 	// H is a height.
 	H *float64 `json:"h,omitempty"`
@@ -131,6 +133,9 @@ type Layer struct {
 	// InPoint of layer. Sets the initial frame of the layer.
 	InPoint *float64 `json:"ip,omitempty"`
 
+	// Property Index. Used for expressions.
+	Ix *int `json:"ix,omitempty"`
+
 	// Transform properties
 	Ks *Transform `json:"ks,omitempty"`
 
@@ -139,6 +144,9 @@ type Layer struct {
 
 	// List of Masks
 	MasksProperties []*Mask `json:"masksProperties,omitempty"`
+
+	// After Effect's Match Name. Used for expressions.
+	Mn *string `json:"mn,omitempty"`
 
 	// After Effects Layer Name. Used for expressions.
 	Nm *string `json:"nm,omitempty"`
@@ -199,6 +207,9 @@ type Layer struct {
 	// C
 	C *ValueOrKeyframed `json:"c,omitempty"`
 
+	// En
+	En *int `json:"en,omitempty"`
+
 	// S
 	S *ValueOrKeyframed `json:"s,omitempty"`
 
@@ -210,4 +221,7 @@ type Layer struct {
 
 	// Tt
 	Tt *float64 `json:"tt,omitempty"`
+
+	// V
+	V *ValueOrKeyframed `json:"v,omitempty"`
 }
