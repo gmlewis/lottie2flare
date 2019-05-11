@@ -133,12 +133,18 @@ type KeyNode struct {
 type NodeType string
 
 const (
-	NodeTypeColorFill          NodeType = "colorFill"
-	NodeTypeColorStroke        NodeType = "colorStroke"
-	NodeTypeNode               NodeType = "node"
-	NodeTypePath               NodeType = "path"
+	// NodeTypeColorFill is a node type.
+	NodeTypeColorFill NodeType = "colorFill"
+	// NodeTypeColorStroke is a node type.
+	NodeTypeColorStroke NodeType = "colorStroke"
+	// NodeTypeNode is a node type.
+	NodeTypeNode NodeType = "node"
+	// NodeTypePath is a node type.
+	NodeTypePath NodeType = "path"
+	// NodeTypeRadialGradientFill is a node type.
 	NodeTypeRadialGradientFill NodeType = "radialGradientFill"
-	NodeTypeShape              NodeType = "shape"
+	// NodeTypeShape is a node type.
+	NodeTypeShape NodeType = "shape"
 )
 
 // Node represents a flare node.
