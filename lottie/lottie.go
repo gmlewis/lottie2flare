@@ -63,6 +63,29 @@ type Mask struct {
 	X *ValueOrKeyframed `json:"x,omitempty"`
 }
 
+// ShapeOrKeyframed represents a lottie
+// properties/shape or
+// properties/shapeKeyframed.
+type ShapeOrKeyframed struct {
+	// Defines if property is animated
+	A *float64 `json:"a,omitempty"`
+
+	// Property Index. Used for expressions.
+	Ix *int `json:"ix,omitempty"`
+
+	// Property Value or keyframes.
+	K interface{} `json:"k,omitempty"`
+
+	// Property Expression. An AE expression that modifies the value.
+	X *string `json:"x,omitempty"`
+
+	// In Spatial Tangent. Only for spatial properties. Array of numbers.
+	Ti []float64 `json:"ti,omitempty"`
+
+	// Out Spatial Tangent. Only for spatial properties. Array of numbers.
+	To []float64 `json:"to,omitempty"`
+}
+
 // I Bezier curve interpolation in value.
 type I struct {
 

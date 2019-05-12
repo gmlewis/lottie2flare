@@ -1,7 +1,5 @@
 package lottie
 
-import "log"
-
 // Bounds represents a lottie bounding box.
 type Bounds struct {
 	Bottom float64 `json:"b"`
@@ -177,7 +175,7 @@ type Layer struct {
 	// From layers/shape:
 
 	// Shape list of items
-	Shapes []*Shape `json:"shapes,omitempty"`
+	Shapes []interface{} `json:"shapes,omitempty"`
 
 	// From layers/solid:
 
@@ -228,6 +226,7 @@ type Layer struct {
 	V *ValueOrKeyframed `json:"v,omitempty"`
 }
 
+/*
 // InitialOpacity return's the layer's initial opacity.
 func (l *Layer) InitialOpacity() *float64 {
 	if l.Ks == nil {
@@ -299,3 +298,5 @@ func (l *Layer) InitialPosition() []float64 {
 	}
 	return nil
 }
+
+*/
