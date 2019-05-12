@@ -1,4 +1,4 @@
-# Convert lottie JSON to Flutter flare JSON
+# Read/Write lottie and Flutter flare files in Go
 
 This is an experimental library and tool used to convert
 [lottie-web](https://github.com/airbnb/lottie-web) files
