@@ -2,7 +2,7 @@
 
 This is an experimental library and tool used to convert
 [lottie-web](https://github.com/airbnb/lottie-web) files
-to [flare](https://2dimensions.com/flare) files.
+to [Flutter](https://flutter.dev) [flare](https://2dimensions.com/flare) files.
 
 It is currently a work-in-progress.
 Only an infinitesimal subset of simple animations are currently supported.
