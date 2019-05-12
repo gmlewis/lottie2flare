@@ -1,4 +1,4 @@
-# Convert Lottie JSON to Flare JSON
+# Convert lottie JSON to Flutter flare JSON
 
 This is an experimental library and tool used to convert
 [lottie-web](https://github.com/airbnb/lottie-web) files
