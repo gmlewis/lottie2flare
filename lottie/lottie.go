@@ -7,15 +7,15 @@ import (
 	"encoding/json"
 	"io/ioutil"
 
-	"github.com/gmlewis/lottie2flare/lottie/layer"
-	"github.com/gmlewis/lottie2flare/lottie/shape"
+	ll "github.com/gmlewis/lottie2flare/lottie/layer"
+	ls "github.com/gmlewis/lottie2flare/lottie/shape"
 )
 
 // Layer represents a lottie layer.
-type Layer = layer.Layer
+type Layer = ll.Layer
 
 // Shape represents a lottie shape.
-type Shape = shape.Shape
+type Shape = ls.Shape
 
 // Asset represents a lottie asset.
 type Asset struct {
@@ -201,6 +201,14 @@ type Animation struct {
 
 	// Composition Width
 	Width *float64 `json:"w,omitempty"`
+}
+
+// GetLayers returns the layers casted to their appropriate types.
+func (a *Animation) GetLayers() (result []Layer) {
+	for _, v := range a.Layers {
+		result = append(result, ll.New(v))
+	}
+	return result
 }
 
 // NewFile parses the provided filename and returns a new Animation.
