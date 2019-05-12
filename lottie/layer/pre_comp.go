@@ -14,10 +14,3 @@ type PreCompT struct {
 func (s *PreCompT) Type() Type {
 	return PreCompType
 }
-
-// NewPreCompT returns a PreCompT from the JSON map.
-func NewPreCompT(m map[string]interface{}) *PreCompT {
-	return &PreCompT{
-		Ty: PreCompType,
-	}
-}

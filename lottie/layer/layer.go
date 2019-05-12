@@ -3,7 +3,10 @@
 // Package layer represents a lottie layer.
 package layer
 
-import "log"
+import (
+	"encoding/json"
+	"log"
+)
 
 // Type identifies the type of lottie layer.
 type Type int
@@ -25,23 +28,28 @@ type Layer interface {
 }
 
 // New uses reflection to return a Layer.
-func New(v interface{}) Layer {
-	m, ok := v.(map[string]interface{})
-	if !ok || m["ty"] == nil {
-		log.Fatalf("invalid layer: %#v", v)
+func New(buf json.RawMessage) Layer {
+	v := &struct{ Ty int }{}
+	if err := json.Unmarshal(buf, v); err != nil {
+		log.Fatalf("invalid layer: %s", buf)
 	}
-	t := Type(int(m["ty"].(float64)))
-	switch t {
+
+	var dst Layer
+	switch Type(v.Ty) {
 	case PreCompType:
-		return NewPreCompT(m)
+		dst = &PreCompT{}
 	case ImageType:
-		return NewImageT(m)
+		dst = &ImageT{}
 	case NullType:
-		return NewNullT(m)
+		dst = &NullT{}
 	case ShapeType:
-		return NewShapeT(m)
+		dst = &ShapeT{}
 	default:
-		log.Fatalf("unsupported layer type %#v", m)
+		log.Fatalf("unsupported layer type %s", buf)
 	}
-	return nil
+
+	if err := json.Unmarshal(buf, dst); err != nil {
+		log.Fatalf("unmarshal %s: %v", buf, err)
+	}
+	return dst
 }

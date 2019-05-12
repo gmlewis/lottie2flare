@@ -41,7 +41,7 @@ type Asset struct {
 	// From sources/precomp:
 
 	// List of Precomp Layers
-	Layers []interface{} `json:"layers,omitempty"`
+	Layers json.RawMessage `json:"layers,omitempty"`
 }
 
 // Char represents a lottie char.
@@ -83,7 +83,7 @@ type ValueOrKeyframed struct {
 	Ix *int `json:"ix,omitempty"`
 
 	// Property value or keyframes
-	K interface{} `json:"k,omitempty"`
+	K json.RawMessage `json:"k,omitempty"`
 
 	// Property Expression. An AE expression that modifies the value.
 	X *string `json:"x,omitempty"`
@@ -100,7 +100,7 @@ type ShapeOrKeyframed struct {
 	Ix *int `json:"ix,omitempty"`
 
 	// Property Value or keyframes.
-	K interface{} `json:"k,omitempty"`
+	K json.RawMessage `json:"k,omitempty"`
 
 	// Property Expression. An AE expression that modifies the value.
 	X *string `json:"x,omitempty"`
@@ -182,7 +182,7 @@ type Animation struct {
 	InPoint *float64 `json:"ip,omitempty"`
 
 	// List of Composition Layers
-	Layers []interface{} `json:"layers,omitempty"`
+	Layers []json.RawMessage `json:"layers,omitempty"`
 
 	// Markers
 	// Note that the pointer to the slice is needed in this

@@ -40,7 +40,7 @@ func Lottie2Flare(anim *lottie.Animation) (*f.Root, error) {
 		},
 	}
 
-	for _, layer := range anim.Layers {
+	for _, layer := range anim.GetLayers() {
 		processLayer(-1, layer, root.Artboards[0])
 	}
 
@@ -49,7 +49,7 @@ func Lottie2Flare(anim *lottie.Animation) (*f.Root, error) {
 
 func processLayer(parentIndex int, layer lottie.Layer, ab *f.Artboard) {
 	switch layer.Type() {
-	case ll.ShapeT:
+	case ll.ShapeType:
 		v := layer.(ll.Shape)
 		processLayerShape(parentIndex, v, ab)
 	default:

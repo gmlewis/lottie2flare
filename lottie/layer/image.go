@@ -14,10 +14,3 @@ type ImageT struct {
 func (s *ImageT) Type() Type {
 	return ImageType
 }
-
-// NewImageT returns a ImageT from the JSON map.
-func NewImageT(m map[string]interface{}) *ImageT {
-	return &ImageT{
-		Ty: ImageType,
-	}
-}

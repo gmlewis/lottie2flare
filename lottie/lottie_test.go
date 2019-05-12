@@ -38,6 +38,16 @@ func TestAnimation_GetLayers(t *testing.T) {
 			json: `{"layers":[{"ty":4}]}`,
 			want: []Layer{&ll.ShapeT{Ty: ll.ShapeType}},
 		},
+		{
+			name: "One of each",
+			json: `{"layers":[{"ty":0},{"ty":2},{"ty":3},{"ty":4}]}`,
+			want: []Layer{
+				&ll.PreCompT{Ty: ll.PreCompType},
+				&ll.ImageT{Ty: ll.ImageType},
+				&ll.NullT{Ty: ll.NullType},
+				&ll.ShapeT{Ty: ll.ShapeType},
+			},
+		},
 	}
 
 	for _, tt := range tests {

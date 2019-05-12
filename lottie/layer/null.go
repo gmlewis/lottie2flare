@@ -14,10 +14,3 @@ type NullT struct {
 func (s *NullT) Type() Type {
 	return NullType
 }
-
-// NewNullT returns a NullT from the JSON map.
-func NewNullT(m map[string]interface{}) *NullT {
-	return &NullT{
-		Ty: NullType,
-	}
-}
