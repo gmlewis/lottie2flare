@@ -3,6 +3,7 @@ package layer
 import (
 	"encoding/json"
 
+	"github.com/gmlewis/lottie2flare/lottie/helpers"
 	ls "github.com/gmlewis/lottie2flare/lottie/shape"
 )
 
@@ -23,20 +24,20 @@ type Shape interface {
 	// GetHasMask returns the HasMask field if it's non-nil, zero value otherwise.
 	GetHasMask() bool
 
-	// GetInd returns the Ind field if it's non-nil, zero value otherwise.
-	GetInd() int
+	// GetIndex returns the Index field if it's non-nil, zero value otherwise.
+	GetIndex() int
 
-	// GetIp returns the Ip field if it's non-nil, zero value otherwise.
-	GetIp() int
+	// GetInPoint returns the InPoint field if it's non-nil, zero value otherwise.
+	GetInPoint() int
 
 	// GetLn returns the Ln field if it's non-nil, zero value otherwise.
 	GetLn() string
 
-	// GetNm returns the Nm field if it's non-nil, zero value otherwise.
-	GetNm() string
+	// GetName returns the Name field if it's non-nil, zero value otherwise.
+	GetName() string
 
-	// GetOp returns the Op field if it's non-nil, zero value otherwise.
-	GetOp() int
+	// GetOutPoint returns the OutPoint field if it's non-nil, zero value otherwise.
+	GetOutPoint() int
 
 	// GetParent returns the Parent field if it's non-nil, zero value otherwise.
 	GetParent() int
@@ -48,6 +49,9 @@ type Shape interface {
 
 	// GetSt returns the St field if it's non-nil, zero value otherwise.
 	GetSt() float64
+
+	// GetTransform returns the shape's transform.
+	GetTransform() *helpers.Transform
 
 	// Type returns ShapeType.
 	Type() Type
@@ -75,16 +79,16 @@ type ShapeT struct {
 	HasMask *bool `json:"hasMask,omitempty"`
 
 	// Layer index in AE. Used for parenting and expressions.
-	Ind *int `json:"ind,omitempty"`
+	Index *int `json:"ind,omitempty"`
 
 	// In Point of layer. Sets the initial frame of the layer.
-	Ip *int `json:"ip,omitempty"`
+	InPoint *int `json:"ip,omitempty"`
 
 	// Shape list of items.
 	Shapes []json.RawMessage `json:"it,omitempty"`
 
 	// Transform properties
-	// Ks *Transform `json:"ks,omitempty"`
+	Transform *helpers.Transform `json:"ks,omitempty"`
 
 	// Parsed layer name used as html id on SVG/HTML renderer
 	Ln *string `json:"ln,omitempty"`
@@ -93,10 +97,10 @@ type ShapeT struct {
 	// MaskProperties []*MaskPropertiesItems `json:"maskProperties,omitempty"`
 
 	// After Effects Layer Name. Used for expressions.
-	Nm *string `json:"nm,omitempty"`
+	Name *string `json:"nm,omitempty"`
 
 	// Out Point of layer. Sets the final frame of the layer.
-	Op *int `json:"op,omitempty"`
+	OutPoint *int `json:"op,omitempty"`
 
 	// Layer Parent. Uses ind of parent.
 	Parent *int `json:"parent,omitempty"`
@@ -122,4 +126,9 @@ func (s *ShapeT) GetShapes() (result []ls.Shape) {
 		result = append(result, ls.New(v))
 	}
 	return result
+}
+
+// GetTransform returns the shape's transform.
+func (s *ShapeT) GetTransform() *helpers.Transform {
+	return s.Transform
 }

@@ -4,7 +4,6 @@ package convert
 import (
 	"log"
 
-	"github.com/gmlewis/lottie2flare/flare"
 	f "github.com/gmlewis/lottie2flare/flare"
 	"github.com/gmlewis/lottie2flare/lottie"
 	ll "github.com/gmlewis/lottie2flare/lottie/layer"
@@ -58,17 +57,18 @@ func processLayer(parentIndex int, layer lottie.Layer, ab *f.Artboard) {
 }
 
 func processLayerShape(parentIndex int, layer ll.Shape, ab *f.Artboard) {
+	xfrm := layer.GetTransform()
 	n := &f.Node{
 		BlendMode:   bmp(f.BlendModeType3),
 		Clips:       &[]int{},
-		DrawOrder:   ip(layer.GetInd()),
+		DrawOrder:   ip(layer.GetIndex()),
 		IsCollapsed: bp(false),
 		IsVisible:   bp(true),
-		Name:        sp(layer.GetNm()),
-		Opacity:     layer.InitialOpacity(),
-		Rotation:    layer.InitialRotation(),
-		Scale:       layer.InitialScale(),
-		Translation: layer.InitialPosition(),
+		Name:        sp(layer.GetName()),
+		Opacity:     fp(xfrm.InitialOpacity()),
+		Rotation:    fp(xfrm.InitialRotation()),
+		Scale:       xfrm.InitialScale(),
+		Translation: xfrm.InitialPosition(),
 		Type:        ntp(f.NodeTypeShape),
 	}
 	if parentIndex >= 0 {
@@ -83,7 +83,7 @@ func processLayerShape(parentIndex int, layer ll.Shape, ab *f.Artboard) {
 			v := shape.(ls.Group)
 			processShapeGroup(nodeNum, v, layer, ab)
 		default:
-			log.Fatalf("lottie shape type %q not yet supported", shape.GetTy())
+			log.Fatalf("lottie shape type %q not yet supported", shape.Type())
 		}
 	}
 
@@ -91,17 +91,18 @@ func processLayerShape(parentIndex int, layer ll.Shape, ab *f.Artboard) {
 }
 
 func processShapeGroup(parentIndex int, shape ls.Group, layer lottie.Layer, ab *f.Artboard) {
-	items := map[lottie.ShapeType][]*lottie.Shape{}
-	for _, item := range shape.It {
-		ty := item.GetTy()
+	items := map[ls.Type][]ls.Shape{}
+	for _, item := range shape.GetShapes() {
+		ty := item.Type()
 		items[ty] = append(items[ty], item)
-		if ty != lottie.ShapeFill && ty != lottie.ShapeTransform && ty != lottie.ShapeEllipse {
+		if ty != ls.FillType && ty != ls.TransformType && ty != ls.EllipseType {
 			log.Printf("WARNING Shape type %q not yet supported. Ignoring.", ty)
 		}
 	}
 
 	// Process fills
-	for _, fill := range items[lottie.ShapeFill] {
+	for _, item := range items[ls.FillType] {
+		fill := item.(ls.Fill)
 		n := &f.Node{
 			Color:    getColor(fill.GetC().K),
 			FillRule: ip(1),
@@ -113,9 +114,10 @@ func processShapeGroup(parentIndex int, shape ls.Group, layer lottie.Layer, ab *
 		ab.Nodes = append(ab.Nodes, n)
 	}
 
-	tr := items[lottie.ShapeTransform]
+	tr := items[ls.TransformType]
 	// Process ellipses
-	for _, ellipse := range items[lottie.ShapeEllipse] {
+	for _, item := range items[ls.EllipseType] {
+		ellipse := item.(ls.Ellipse)
 		s := getVector(ellipse.GetS().K)
 		p := getVector(ellipse.GetP().K)
 		if len(s) < 2 {
@@ -141,14 +143,6 @@ func processShapeGroup(parentIndex int, shape ls.Group, layer lottie.Layer, ab *
 	}
 }
 
-func getColor(k interface{}) *flare.Color {
-	v := getVector(k)
-	if len(v) < 4 {
-		log.Fatalf("getColor: bad K vector: %#v", v)
-	}
-	return &flare.Color{v[0], v[1], v[2], v[3]}
-}
-
 func addKeys(componentNum int, layer lottie.Layer, ab *f.Artboard) {
 	lastAnim := ab.Animations[len(ab.Animations)-1]
 	keyed := &f.Key{
@@ -165,6 +159,15 @@ func addKeys(componentNum int, layer lottie.Layer, ab *f.Artboard) {
 	}
 
 	lastAnim.Keyed = append(lastAnim.Keyed, keyed)
+}
+
+/*
+func getColor(k interface{}) *flare.Color {
+	v := getVector(k)
+	if len(v) < 4 {
+		log.Fatalf("getColor: bad K vector: %#v", v)
+	}
+	return &flare.Color{v[0], v[1], v[2], v[3]}
 }
 
 func getKeys(ks []interface{}, fps, scaleFactor float64) (result []*f.KeyNode) {
@@ -280,6 +283,7 @@ func hasKey(k interface{}, key string) bool {
 	}
 	return false
 }
+*/
 
 func bmp(v f.BlendModeType) *f.BlendModeType {
 	return &v

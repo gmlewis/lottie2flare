@@ -42,20 +42,20 @@ func (s *ShapeT) GetHasMask() bool {
 	return *s.HasMask
 }
 
-// GetInd returns the Ind field if it's non-nil, zero value otherwise.
-func (s *ShapeT) GetInd() int {
-	if s == nil || s.Ind == nil {
+// GetIndex returns the Index field if it's non-nil, zero value otherwise.
+func (s *ShapeT) GetIndex() int {
+	if s == nil || s.Index == nil {
 		return 0
 	}
-	return *s.Ind
+	return *s.Index
 }
 
-// GetIp returns the Ip field if it's non-nil, zero value otherwise.
-func (s *ShapeT) GetIp() int {
-	if s == nil || s.Ip == nil {
+// GetInPoint returns the InPoint field if it's non-nil, zero value otherwise.
+func (s *ShapeT) GetInPoint() int {
+	if s == nil || s.InPoint == nil {
 		return 0
 	}
-	return *s.Ip
+	return *s.InPoint
 }
 
 // GetLn returns the Ln field if it's non-nil, zero value otherwise.
@@ -66,20 +66,20 @@ func (s *ShapeT) GetLn() string {
 	return *s.Ln
 }
 
-// GetNm returns the Nm field if it's non-nil, zero value otherwise.
-func (s *ShapeT) GetNm() string {
-	if s == nil || s.Nm == nil {
+// GetName returns the Name field if it's non-nil, zero value otherwise.
+func (s *ShapeT) GetName() string {
+	if s == nil || s.Name == nil {
 		return ""
 	}
-	return *s.Nm
+	return *s.Name
 }
 
-// GetOp returns the Op field if it's non-nil, zero value otherwise.
-func (s *ShapeT) GetOp() int {
-	if s == nil || s.Op == nil {
+// GetOutPoint returns the OutPoint field if it's non-nil, zero value otherwise.
+func (s *ShapeT) GetOutPoint() int {
+	if s == nil || s.OutPoint == nil {
 		return 0
 	}
-	return *s.Op
+	return *s.OutPoint
 }
 
 // GetParent returns the Parent field if it's non-nil, zero value otherwise.

@@ -2,6 +2,10 @@ package shape
 
 // Fill represents a lottie shape/fill.
 type Fill interface {
+	// GetColor returns an RGBA color (0-1).
+	GetColor() [4]float64
+
+	// Type returns FillType.
 	Type() Type
 }
 

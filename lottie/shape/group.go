@@ -4,6 +4,10 @@ import "encoding/json"
 
 // Group represents a lottie shape/group.
 type Group interface {
+	// GetShapes returns the shapes in the group.
+	GetShapes() []Shape
+
+	// Type returns GroupType.
 	Type() Type
 }
 
