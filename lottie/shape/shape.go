@@ -1,3 +1,5 @@
+//go:generate go run ../gen-accessors.go
+
 // Package shape represents a lottie shape.
 package shape
 
