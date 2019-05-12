@@ -1,8 +1,8 @@
 #!/bin/bash -ex
 
 # Run once:
-# jq -S . < examples/resizing-house/resizing-house.flr > examples/resizing-house/resizing-house.flr
-# jq -S . < examples/simple-loader/simple-loader.flr > examples/simple-loader/simple-loader.flr
+# jq -S . < examples/resizing-house/resizing-house.orig.flr > examples/resizing-house/resizing-house.flr
+# jq -S . < examples/simple-loader/simple-loader.orig.flr > examples/simple-loader/simple-loader.flr
 
 go run cmd/dump-flare/main.go \
   examples/resizing-house/resizing-house.flr \

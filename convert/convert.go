@@ -91,6 +91,9 @@ func processShapeGroup(parentIndex int, shape *lottie.Shape, layer *lottie.Layer
 	for _, item := range shape.It {
 		ty := item.GetTy()
 		items[ty] = append(items[ty], item)
+		if ty != lottie.ShapeFill && ty != lottie.ShapeTransform && ty != lottie.ShapeEllipse {
+			log.Printf("WARNING Shape type %q not yet supported. Ignoring.", ty)
+		}
 	}
 
 	// Process fills
