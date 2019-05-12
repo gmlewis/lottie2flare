@@ -78,9 +78,10 @@ func processLayerShape(parentIndex int, layer ll.Shape, ab *f.Artboard) {
 	ab.Nodes = append(ab.Nodes, n)
 
 	for _, shape := range layer.GetShapes() {
-		switch shape.GetType() {
-		case ls.Group:
-			processShapeGroup(nodeNum, shape, layer, ab)
+		switch shape.Type() {
+		case ls.GroupType:
+			v := shape.(ls.Group)
+			processShapeGroup(nodeNum, v, layer, ab)
 		default:
 			log.Fatalf("lottie shape type %q not yet supported", shape.GetTy())
 		}
@@ -89,7 +90,7 @@ func processLayerShape(parentIndex int, layer ll.Shape, ab *f.Artboard) {
 	addKeys(nodeNum, layer, ab)
 }
 
-func processShapeGroup(parentIndex int, shape *lottie.Shape, layer lottie.Layer, ab *f.Artboard) {
+func processShapeGroup(parentIndex int, shape ls.Group, layer lottie.Layer, ab *f.Artboard) {
 	items := map[lottie.ShapeType][]*lottie.Shape{}
 	for _, item := range shape.It {
 		ty := item.GetTy()

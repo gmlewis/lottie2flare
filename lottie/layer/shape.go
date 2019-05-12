@@ -116,7 +116,7 @@ func (s *ShapeT) Type() Type {
 	return ShapeType
 }
 
-// GetShapes returns the layers casted to their appropriate types.
+// GetShapes returns the shapes casted to their appropriate types.
 func (s *ShapeT) GetShapes() (result []ls.Shape) {
 	for _, v := range s.Shapes {
 		result = append(result, ls.New(v))
