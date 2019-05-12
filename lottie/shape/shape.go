@@ -35,7 +35,7 @@ const (
 	TransformT Type = "tr"
 )
 
-// Shape represents a lottie shape.
+// Shape represents a lottie shape/shape.
 type Shape interface {
 	Type() Type
 }
