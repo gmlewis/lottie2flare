@@ -77,8 +77,8 @@ func processLayerShape(parentIndex int, layer ll.Shape, ab *f.Artboard) {
 	nodeNum := len(ab.Nodes)
 	ab.Nodes = append(ab.Nodes, n)
 
-	for _, shape := range layer.Shapes {
-		switch shape.GetTy() {
+	for _, shape := range layer.GetShapes() {
+		switch shape.GetType() {
 		case ls.Group:
 			processShapeGroup(nodeNum, shape, layer, ab)
 		default:

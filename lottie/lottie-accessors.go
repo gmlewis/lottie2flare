@@ -241,3 +241,27 @@ func (v *ValueKeyframed) GetX() string {
 	}
 	return *v.X
 }
+
+// GetA returns the A field if it's non-nil, zero value otherwise.
+func (v *ValueOrKeyframed) GetA() float64 {
+	if v == nil || v.A == nil {
+		return 0.0
+	}
+	return *v.A
+}
+
+// GetIx returns the Ix field if it's non-nil, zero value otherwise.
+func (v *ValueOrKeyframed) GetIx() int {
+	if v == nil || v.Ix == nil {
+		return 0
+	}
+	return *v.Ix
+}
+
+// GetX returns the X field if it's non-nil, zero value otherwise.
+func (v *ValueOrKeyframed) GetX() string {
+	if v == nil || v.X == nil {
+		return ""
+	}
+	return *v.X
+}

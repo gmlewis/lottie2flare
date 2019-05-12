@@ -1,7 +1,55 @@
 package layer
 
+import (
+	"encoding/json"
+
+	ls "github.com/gmlewis/lottie2flare/lottie/shape"
+)
+
 // Shape represents a lottie shape layer.
 type Shape interface {
+	// GetAo returns the Ao field if it's non-nil, zero value otherwise.
+	GetAo() int
+
+	// GetBm returns the Bm field if it's non-nil, zero value otherwise.
+	GetBm() int
+
+	// GetCl returns the Cl field if it's non-nil, zero value otherwise.
+	GetCl() string
+
+	// GetDdd returns the Ddd field if it's non-nil, zero value otherwise.
+	GetDdd() int
+
+	// GetHasMask returns the HasMask field if it's non-nil, zero value otherwise.
+	GetHasMask() bool
+
+	// GetInd returns the Ind field if it's non-nil, zero value otherwise.
+	GetInd() int
+
+	// GetIp returns the Ip field if it's non-nil, zero value otherwise.
+	GetIp() int
+
+	// GetLn returns the Ln field if it's non-nil, zero value otherwise.
+	GetLn() string
+
+	// GetNm returns the Nm field if it's non-nil, zero value otherwise.
+	GetNm() string
+
+	// GetOp returns the Op field if it's non-nil, zero value otherwise.
+	GetOp() int
+
+	// GetParent returns the Parent field if it's non-nil, zero value otherwise.
+	GetParent() int
+
+	GetShapes() []ls.Shape
+
+	// GetSr returns the Sr field if it's non-nil, zero value otherwise.
+	GetSr() float64
+
+	// GetSt returns the St field if it's non-nil, zero value otherwise.
+	GetSt() float64
+
+	// Type returns ShapeType.
 	Type() Type
 }
 
@@ -32,8 +80,8 @@ type ShapeT struct {
 	// In Point of layer. Sets the initial frame of the layer.
 	Ip *int `json:"ip,omitempty"`
 
-	// Shape list of items
-	// It []*ItemsItems `json:"it,omitempty"`
+	// Shape list of items.
+	Shapes []json.RawMessage `json:"it,omitempty"`
 
 	// Transform properties
 	// Ks *Transform `json:"ks,omitempty"`
@@ -66,4 +114,12 @@ type ShapeT struct {
 // Type returns the layer type.
 func (s *ShapeT) Type() Type {
 	return ShapeType
+}
+
+// GetShapes returns the layers casted to their appropriate types.
+func (s *ShapeT) GetShapes() (result []ls.Shape) {
+	for _, v := range s.Shapes {
+		result = append(result, ls.New(v))
+	}
+	return result
 }
