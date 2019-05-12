@@ -6,7 +6,16 @@ package lottie
 import (
 	"encoding/json"
 	"io/ioutil"
+
+	"github.com/gmlewis/lottie2flare/lottie/layer"
+	"github.com/gmlewis/lottie2flare/lottie/shape"
 )
+
+// Layer represents a lottie layer.
+type Layer = layer.Layer
+
+// Shape represents a lottie shape.
+type Shape = shape.Shape
 
 // Asset represents a lottie asset.
 type Asset struct {

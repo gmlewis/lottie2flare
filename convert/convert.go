@@ -7,6 +7,8 @@ import (
 	"github.com/gmlewis/lottie2flare/flare"
 	f "github.com/gmlewis/lottie2flare/flare"
 	"github.com/gmlewis/lottie2flare/lottie"
+	ll "github.com/gmlewis/lottie2flare/lottie/layer"
+	ls "github.com/gmlewis/lottie2flare/lottie/shape"
 )
 
 // Lottie2Flare converts a lottie animation to a flare root.
@@ -45,16 +47,17 @@ func Lottie2Flare(anim *lottie.Animation) (*f.Root, error) {
 	return root, nil
 }
 
-func processLayer(parentIndex int, layer *lottie.Layer, ab *f.Artboard) {
-	switch layer.GetTy() {
-	case lottie.LayerShape:
-		processLayerShape(parentIndex, layer, ab)
+func processLayer(parentIndex int, layer lottie.Layer, ab *f.Artboard) {
+	switch layer.Type() {
+	case ll.ShapeT:
+		v := layer.(ll.Shape)
+		processLayerShape(parentIndex, v, ab)
 	default:
-		log.Fatalf("Lottie shape type %v not yet supported.", layer.GetTy())
+		log.Fatalf("Lottie shape type %v not yet supported.", layer.Type())
 	}
 }
 
-func processLayerShape(parentIndex int, layer *lottie.Layer, ab *f.Artboard) {
+func processLayerShape(parentIndex int, layer ll.Shape, ab *f.Artboard) {
 	n := &f.Node{
 		BlendMode:   bmp(f.BlendModeType3),
 		Clips:       &[]int{},
@@ -76,7 +79,7 @@ func processLayerShape(parentIndex int, layer *lottie.Layer, ab *f.Artboard) {
 
 	for _, shape := range layer.Shapes {
 		switch shape.GetTy() {
-		case lottie.ShapeGroup:
+		case ls.Group:
 			processShapeGroup(nodeNum, shape, layer, ab)
 		default:
 			log.Fatalf("lottie shape type %q not yet supported", shape.GetTy())
@@ -86,7 +89,7 @@ func processLayerShape(parentIndex int, layer *lottie.Layer, ab *f.Artboard) {
 	addKeys(nodeNum, layer, ab)
 }
 
-func processShapeGroup(parentIndex int, shape *lottie.Shape, layer *lottie.Layer, ab *f.Artboard) {
+func processShapeGroup(parentIndex int, shape *lottie.Shape, layer lottie.Layer, ab *f.Artboard) {
 	items := map[lottie.ShapeType][]*lottie.Shape{}
 	for _, item := range shape.It {
 		ty := item.GetTy()
@@ -145,7 +148,7 @@ func getColor(k interface{}) *flare.Color {
 	return &flare.Color{v[0], v[1], v[2], v[3]}
 }
 
-func addKeys(componentNum int, layer *lottie.Layer, ab *f.Artboard) {
+func addKeys(componentNum int, layer lottie.Layer, ab *f.Artboard) {
 	lastAnim := ab.Animations[len(ab.Animations)-1]
 	keyed := &f.Key{
 		Component: ip(componentNum),
