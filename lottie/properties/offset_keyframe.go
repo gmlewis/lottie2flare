@@ -10,8 +10,8 @@ type OffsetKeyframe struct {
 	Out *Out `json:"o,omitempty"`
 
 	// Start value of keyframe segment.
-	S []float64 `json:"s,omitempty"`
+	StartValue []float64 `json:"s,omitempty"`
 
 	// Start time of keyframe segment.
-	T *float64 `json:"t,omitempty"`
+	StartTime *float64 `json:"t,omitempty"`
 }

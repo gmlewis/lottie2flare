@@ -2,28 +2,348 @@
 
 package layer
 
-// GetAo returns the Ao field if it's non-nil, zero value otherwise.
-func (s *ShapeT) GetAo() int {
-	if s == nil || s.Ao == nil {
+// GetAutoOrient returns the AutoOrient field if it's non-nil, zero value otherwise.
+func (i *ImageT) GetAutoOrient() int {
+	if i == nil || i.AutoOrient == nil {
 		return 0
 	}
-	return *s.Ao
+	return *i.AutoOrient
 }
 
-// GetBm returns the Bm field if it's non-nil, zero value otherwise.
-func (s *ShapeT) GetBm() int {
-	if s == nil || s.Bm == nil {
+// GetBlendMode returns the BlendMode field if it's non-nil, zero value otherwise.
+func (i *ImageT) GetBlendMode() int {
+	if i == nil || i.BlendMode == nil {
 		return 0
 	}
-	return *s.Bm
+	return *i.BlendMode
 }
 
-// GetCl returns the Cl field if it's non-nil, zero value otherwise.
-func (s *ShapeT) GetCl() string {
-	if s == nil || s.Cl == nil {
+// GetClass returns the Class field if it's non-nil, zero value otherwise.
+func (i *ImageT) GetClass() string {
+	if i == nil || i.Class == nil {
 		return ""
 	}
-	return *s.Cl
+	return *i.Class
+}
+
+// GetDdd returns the Ddd field if it's non-nil, zero value otherwise.
+func (i *ImageT) GetDdd() int {
+	if i == nil || i.Ddd == nil {
+		return 0
+	}
+	return *i.Ddd
+}
+
+// GetHasMask returns the HasMask field if it's non-nil, zero value otherwise.
+func (i *ImageT) GetHasMask() bool {
+	if i == nil || i.HasMask == nil {
+		return false
+	}
+	return *i.HasMask
+}
+
+// GetInded returns the Inded field if it's non-nil, zero value otherwise.
+func (i *ImageT) GetInded() int {
+	if i == nil || i.Inded == nil {
+		return 0
+	}
+	return *i.Inded
+}
+
+// GetInPoint returns the InPoint field if it's non-nil, zero value otherwise.
+func (i *ImageT) GetInPoint() int {
+	if i == nil || i.InPoint == nil {
+		return 0
+	}
+	return *i.InPoint
+}
+
+// GetLayerName returns the LayerName field if it's non-nil, zero value otherwise.
+func (i *ImageT) GetLayerName() string {
+	if i == nil || i.LayerName == nil {
+		return ""
+	}
+	return *i.LayerName
+}
+
+// GetName returns the Name field if it's non-nil, zero value otherwise.
+func (i *ImageT) GetName() string {
+	if i == nil || i.Name == nil {
+		return ""
+	}
+	return *i.Name
+}
+
+// GetOutPoint returns the OutPoint field if it's non-nil, zero value otherwise.
+func (i *ImageT) GetOutPoint() int {
+	if i == nil || i.OutPoint == nil {
+		return 0
+	}
+	return *i.OutPoint
+}
+
+// GetParent returns the Parent field if it's non-nil, zero value otherwise.
+func (i *ImageT) GetParent() int {
+	if i == nil || i.Parent == nil {
+		return 0
+	}
+	return *i.Parent
+}
+
+// GetRefID returns the RefID field if it's non-nil, zero value otherwise.
+func (i *ImageT) GetRefID() string {
+	if i == nil || i.RefID == nil {
+		return ""
+	}
+	return *i.RefID
+}
+
+// GetStartTime returns the StartTime field if it's non-nil, zero value otherwise.
+func (i *ImageT) GetStartTime() float64 {
+	if i == nil || i.StartTime == nil {
+		return 0.0
+	}
+	return *i.StartTime
+}
+
+// GetTimeStretching returns the TimeStretching field if it's non-nil, zero value otherwise.
+func (i *ImageT) GetTimeStretching() float64 {
+	if i == nil || i.TimeStretching == nil {
+		return 0.0
+	}
+	return *i.TimeStretching
+}
+
+// GetAutoOrient returns the AutoOrient field if it's non-nil, zero value otherwise.
+func (n *NullT) GetAutoOrient() int {
+	if n == nil || n.AutoOrient == nil {
+		return 0
+	}
+	return *n.AutoOrient
+}
+
+// GetClass returns the Class field if it's non-nil, zero value otherwise.
+func (n *NullT) GetClass() string {
+	if n == nil || n.Class == nil {
+		return ""
+	}
+	return *n.Class
+}
+
+// GetDdd returns the Ddd field if it's non-nil, zero value otherwise.
+func (n *NullT) GetDdd() int {
+	if n == nil || n.Ddd == nil {
+		return 0
+	}
+	return *n.Ddd
+}
+
+// GetInd returns the Ind field if it's non-nil, zero value otherwise.
+func (n *NullT) GetInd() int {
+	if n == nil || n.Ind == nil {
+		return 0
+	}
+	return *n.Ind
+}
+
+// GetInPoint returns the InPoint field if it's non-nil, zero value otherwise.
+func (n *NullT) GetInPoint() int {
+	if n == nil || n.InPoint == nil {
+		return 0
+	}
+	return *n.InPoint
+}
+
+// GetLayerName returns the LayerName field if it's non-nil, zero value otherwise.
+func (n *NullT) GetLayerName() string {
+	if n == nil || n.LayerName == nil {
+		return ""
+	}
+	return *n.LayerName
+}
+
+// GetName returns the Name field if it's non-nil, zero value otherwise.
+func (n *NullT) GetName() float64 {
+	if n == nil || n.Name == nil {
+		return 0.0
+	}
+	return *n.Name
+}
+
+// GetOutPoint returns the OutPoint field if it's non-nil, zero value otherwise.
+func (n *NullT) GetOutPoint() int {
+	if n == nil || n.OutPoint == nil {
+		return 0
+	}
+	return *n.OutPoint
+}
+
+// GetParent returns the Parent field if it's non-nil, zero value otherwise.
+func (n *NullT) GetParent() int {
+	if n == nil || n.Parent == nil {
+		return 0
+	}
+	return *n.Parent
+}
+
+// GetStartTime returns the StartTime field if it's non-nil, zero value otherwise.
+func (n *NullT) GetStartTime() float64 {
+	if n == nil || n.StartTime == nil {
+		return 0.0
+	}
+	return *n.StartTime
+}
+
+// GetTimeStretching returns the TimeStretching field if it's non-nil, zero value otherwise.
+func (n *NullT) GetTimeStretching() float64 {
+	if n == nil || n.TimeStretching == nil {
+		return 0.0
+	}
+	return *n.TimeStretching
+}
+
+// GetAutoOrient returns the AutoOrient field if it's non-nil, zero value otherwise.
+func (p *PreCompT) GetAutoOrient() int {
+	if p == nil || p.AutoOrient == nil {
+		return 0
+	}
+	return *p.AutoOrient
+}
+
+// GetBlendMode returns the BlendMode field if it's non-nil, zero value otherwise.
+func (p *PreCompT) GetBlendMode() int {
+	if p == nil || p.BlendMode == nil {
+		return 0
+	}
+	return *p.BlendMode
+}
+
+// GetClass returns the Class field if it's non-nil, zero value otherwise.
+func (p *PreCompT) GetClass() string {
+	if p == nil || p.Class == nil {
+		return ""
+	}
+	return *p.Class
+}
+
+// GetDdd returns the Ddd field if it's non-nil, zero value otherwise.
+func (p *PreCompT) GetDdd() int {
+	if p == nil || p.Ddd == nil {
+		return 0
+	}
+	return *p.Ddd
+}
+
+// GetHasMask returns the HasMask field if it's non-nil, zero value otherwise.
+func (p *PreCompT) GetHasMask() bool {
+	if p == nil || p.HasMask == nil {
+		return false
+	}
+	return *p.HasMask
+}
+
+// GetIndex returns the Index field if it's non-nil, zero value otherwise.
+func (p *PreCompT) GetIndex() int {
+	if p == nil || p.Index == nil {
+		return 0
+	}
+	return *p.Index
+}
+
+// GetInPoint returns the InPoint field if it's non-nil, zero value otherwise.
+func (p *PreCompT) GetInPoint() int {
+	if p == nil || p.InPoint == nil {
+		return 0
+	}
+	return *p.InPoint
+}
+
+// GetLayerName returns the LayerName field if it's non-nil, zero value otherwise.
+func (p *PreCompT) GetLayerName() string {
+	if p == nil || p.LayerName == nil {
+		return ""
+	}
+	return *p.LayerName
+}
+
+// GetName returns the Name field if it's non-nil, zero value otherwise.
+func (p *PreCompT) GetName() string {
+	if p == nil || p.Name == nil {
+		return ""
+	}
+	return *p.Name
+}
+
+// GetOutPoint returns the OutPoint field if it's non-nil, zero value otherwise.
+func (p *PreCompT) GetOutPoint() int {
+	if p == nil || p.OutPoint == nil {
+		return 0
+	}
+	return *p.OutPoint
+}
+
+// GetParent returns the Parent field if it's non-nil, zero value otherwise.
+func (p *PreCompT) GetParent() int {
+	if p == nil || p.Parent == nil {
+		return 0
+	}
+	return *p.Parent
+}
+
+// GetRefID returns the RefID field if it's non-nil, zero value otherwise.
+func (p *PreCompT) GetRefID() string {
+	if p == nil || p.RefID == nil {
+		return ""
+	}
+	return *p.RefID
+}
+
+// GetStartTime returns the StartTime field if it's non-nil, zero value otherwise.
+func (p *PreCompT) GetStartTime() float64 {
+	if p == nil || p.StartTime == nil {
+		return 0.0
+	}
+	return *p.StartTime
+}
+
+// GetTimeMapping returns the TimeMapping field if it's non-nil, zero value otherwise.
+func (p *PreCompT) GetTimeMapping() float64 {
+	if p == nil || p.TimeMapping == nil {
+		return 0.0
+	}
+	return *p.TimeMapping
+}
+
+// GetTimeStretching returns the TimeStretching field if it's non-nil, zero value otherwise.
+func (p *PreCompT) GetTimeStretching() float64 {
+	if p == nil || p.TimeStretching == nil {
+		return 0.0
+	}
+	return *p.TimeStretching
+}
+
+// GetAutoOrient returns the AutoOrient field if it's non-nil, zero value otherwise.
+func (s *ShapeT) GetAutoOrient() int {
+	if s == nil || s.AutoOrient == nil {
+		return 0
+	}
+	return *s.AutoOrient
+}
+
+// GetBlendMode returns the BlendMode field if it's non-nil, zero value otherwise.
+func (s *ShapeT) GetBlendMode() int {
+	if s == nil || s.BlendMode == nil {
+		return 0
+	}
+	return *s.BlendMode
+}
+
+// GetClass returns the Class field if it's non-nil, zero value otherwise.
+func (s *ShapeT) GetClass() string {
+	if s == nil || s.Class == nil {
+		return ""
+	}
+	return *s.Class
 }
 
 // GetDdd returns the Ddd field if it's non-nil, zero value otherwise.
@@ -58,12 +378,12 @@ func (s *ShapeT) GetInPoint() int {
 	return *s.InPoint
 }
 
-// GetLn returns the Ln field if it's non-nil, zero value otherwise.
-func (s *ShapeT) GetLn() string {
-	if s == nil || s.Ln == nil {
+// GetLayerName returns the LayerName field if it's non-nil, zero value otherwise.
+func (s *ShapeT) GetLayerName() string {
+	if s == nil || s.LayerName == nil {
 		return ""
 	}
-	return *s.Ln
+	return *s.LayerName
 }
 
 // GetName returns the Name field if it's non-nil, zero value otherwise.
@@ -90,18 +410,18 @@ func (s *ShapeT) GetParent() int {
 	return *s.Parent
 }
 
-// GetSr returns the Sr field if it's non-nil, zero value otherwise.
-func (s *ShapeT) GetSr() float64 {
-	if s == nil || s.Sr == nil {
+// GetStartTime returns the StartTime field if it's non-nil, zero value otherwise.
+func (s *ShapeT) GetStartTime() float64 {
+	if s == nil || s.StartTime == nil {
 		return 0.0
 	}
-	return *s.Sr
+	return *s.StartTime
 }
 
-// GetSt returns the St field if it's non-nil, zero value otherwise.
-func (s *ShapeT) GetSt() float64 {
-	if s == nil || s.St == nil {
+// GetTimeStretching returns the TimeStretching field if it's non-nil, zero value otherwise.
+func (s *ShapeT) GetTimeStretching() float64 {
+	if s == nil || s.TimeStretching == nil {
 		return 0.0
 	}
-	return *s.St
+	return *s.TimeStretching
 }

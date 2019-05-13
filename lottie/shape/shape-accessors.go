@@ -2,28 +2,84 @@
 
 package shape
 
-// GetMn returns the Mn field if it's non-nil, zero value otherwise.
-func (g *GroupT) GetMn() string {
-	if g == nil || g.Mn == nil {
-		return ""
+// GetDirection returns the Direction field if it's non-nil, zero value otherwise.
+func (e *EllipseT) GetDirection() int {
+	if e == nil || e.Direction == nil {
+		return 0
 	}
-	return *g.Mn
+	return *e.Direction
 }
 
-// GetNm returns the Nm field if it's non-nil, zero value otherwise.
-func (g *GroupT) GetNm() string {
-	if g == nil || g.Nm == nil {
+// GetMatchName returns the MatchName field if it's non-nil, zero value otherwise.
+func (e *EllipseT) GetMatchName() string {
+	if e == nil || e.MatchName == nil {
 		return ""
 	}
-	return *g.Nm
+	return *e.MatchName
 }
 
-// GetNp returns the Np field if it's non-nil, zero value otherwise.
-func (g *GroupT) GetNp() float64 {
-	if g == nil || g.Np == nil {
-		return 0.0
+// GetName returns the Name field if it's non-nil, zero value otherwise.
+func (e *EllipseT) GetName() string {
+	if e == nil || e.Name == nil {
+		return ""
 	}
-	return *g.Np
+	return *e.Name
+}
+
+// GetTy returns the Ty field if it's non-nil, zero value otherwise.
+func (e *EllipseT) GetTy() string {
+	if e == nil || e.Ty == nil {
+		return ""
+	}
+	return *e.Ty
+}
+
+// GetMatchName returns the MatchName field if it's non-nil, zero value otherwise.
+func (f *FillT) GetMatchName() string {
+	if f == nil || f.MatchName == nil {
+		return ""
+	}
+	return *f.MatchName
+}
+
+// GetName returns the Name field if it's non-nil, zero value otherwise.
+func (f *FillT) GetName() string {
+	if f == nil || f.Name == nil {
+		return ""
+	}
+	return *f.Name
+}
+
+// GetTy returns the Ty field if it's non-nil, zero value otherwise.
+func (f *FillT) GetTy() string {
+	if f == nil || f.Ty == nil {
+		return ""
+	}
+	return *f.Ty
+}
+
+// GetMatchName returns the MatchName field if it's non-nil, zero value otherwise.
+func (g *GroupT) GetMatchName() string {
+	if g == nil || g.MatchName == nil {
+		return ""
+	}
+	return *g.MatchName
+}
+
+// GetName returns the Name field if it's non-nil, zero value otherwise.
+func (g *GroupT) GetName() string {
+	if g == nil || g.Name == nil {
+		return ""
+	}
+	return *g.Name
+}
+
+// GetNumProperties returns the NumProperties field if it's non-nil, zero value otherwise.
+func (g *GroupT) GetNumProperties() int {
+	if g == nil || g.NumProperties == nil {
+		return 0
+	}
+	return *g.NumProperties
 }
 
 // GetTy returns the Ty field if it's non-nil, zero value otherwise.
@@ -32,4 +88,12 @@ func (g *GroupT) GetTy() string {
 		return ""
 	}
 	return *g.Ty
+}
+
+// GetName returns the Name field if it's non-nil, zero value otherwise.
+func (t *TransformT) GetName() string {
+	if t == nil || t.Name == nil {
+		return ""
+	}
+	return *t.Name
 }

@@ -1,3 +1,6 @@
+//go:generate go run ../gen-accessors.go
+
+// Package helpers provides helper types for lottie files.
 package helpers
 
 import (
@@ -42,27 +45,37 @@ type Transform struct {
 // InitialOpacity returns the initial opacity of the transform.
 func (t *Transform) InitialOpacity() float64 {
 	v, vk := properties.ValueOrValueKeyframed(t.Opacity)
-	log.Printf("v=%#v, vk=%#v", v, vk)
+	log.Printf("helpers.Transform: v=%#v, vk=%#v", v, vk)
 	return 0.0
+}
+
+// OpacityKeys returns the opacity keys of the transform.
+func (t *Transform) OpacityKeys() *properties.ValueKeyframed {
+	vk, err := properties.GetValueKeyframed(t.Opacity)
+	if err != nil {
+		log.Printf("WARNING: expected OpacityKeys from %s", t.Opacity)
+		return nil
+	}
+	return vk
 }
 
 // InitialRotation returns the initial rotation of the transform.
 func (t *Transform) InitialRotation() float64 {
 	v, vk := properties.ValueOrValueKeyframed(t.Rotation)
-	log.Printf("v=%#v, vk=%#v", v, vk)
+	log.Printf("helpers.Transform: v=%#v, vk=%#v", v, vk)
 	return 0.0
 }
 
 // InitialPosition returns the initial rotation of the transform.
 func (t *Transform) InitialPosition() []float64 {
 	md, mdk := properties.MultiDimensionalOrMultiDimensionalKeyframed(t.Position)
-	log.Printf("md=%#v, mdk=%#v", md, mdk)
+	log.Printf("helpers.Transform: md=%#v, mdk=%#v", md, mdk)
 	return []float64{1, 1}
 }
 
 // InitialScale returns the initial rotation of the transform.
 func (t *Transform) InitialScale() []float64 {
 	md, mdk := properties.MultiDimensionalOrMultiDimensionalKeyframed(t.Scale)
-	log.Printf("md=%#v, mdk=%#v", md, mdk)
+	log.Printf("helpers.Transform: md=%#v, mdk=%#v", md, mdk)
 	return []float64{1, 1}
 }

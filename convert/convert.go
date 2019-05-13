@@ -104,10 +104,10 @@ func processShapeGroup(parentIndex int, shape ls.Group, layer lottie.Layer, ab *
 	for _, item := range items[ls.FillType] {
 		fill := item.(ls.Fill)
 		n := &f.Node{
-			Color:    getColor(fill.GetC().K),
+			Color:    cp(fill.GetColor()),
 			FillRule: ip(1),
-			Name:     sp(fill.GetNm()),
-			Opacity:  fp(getScalar(fill.GetO().K) / 100.0),
+			Name:     sp(fill.GetName()),
+			Opacity:  fp(fill.GetOpacity()),
 			Parent:   ip(parentIndex),
 			Type:     ntp(f.NodeTypeColorFill),
 		}
@@ -118,26 +118,23 @@ func processShapeGroup(parentIndex int, shape ls.Group, layer lottie.Layer, ab *
 	// Process ellipses
 	for _, item := range items[ls.EllipseType] {
 		ellipse := item.(ls.Ellipse)
-		s := getVector(ellipse.GetS().K)
-		p := getVector(ellipse.GetP().K)
-		if len(s) < 2 {
-			log.Fatalf("Bad ellipse S: %#v", s)
-		}
+		size := ellipse.GetSize()
+		position := ellipse.GetPosition()
 		n := &f.Node{
 			Clips:       &[]int{},
-			Height:      fp(s[1]),
+			Height:      fp(size[1]),
 			IsCollapsed: bp(false),
-			Name:        sp(ellipse.GetNm()),
+			Name:        sp(ellipse.GetName()),
 			Parent:      ip(parentIndex),
-			Translation: p,
+			Translation: position,
 			Type:        ntp(f.NodeTypeEllipse),
-			Width:       fp(s[0]),
+			Width:       fp(size[0]),
 		}
 		if len(tr) > 0 {
-			n.Opacity = fp(getScalar(tr[0].GetO().K) / 100.0)
-			n.Rotation = fp(getKey(tr[0].R, "k"))
-			sf := getVector(tr[0].GetS().K)
-			n.Scale = []float64{sf[0] / 100.0, sf[1] / 100.0}
+			xfrm := tr[0].(ls.Transform)
+			n.Opacity = fp(xfrm.InitialOpacity())
+			n.Rotation = fp(xfrm.InitialRotation())
+			n.Scale = xfrm.InitialScale()
 		}
 		ab.Nodes = append(ab.Nodes, n)
 	}
@@ -149,13 +146,23 @@ func addKeys(componentNum int, layer lottie.Layer, ab *f.Artboard) {
 		Component: ip(componentNum),
 	}
 
-	if o := layer.Ks.GetO(); o != nil {
-		switch v := o.K.(type) {
-		case []interface{}:
-			keyed.Opacity = [][]*f.KeyNode{getKeys(v, *lastAnim.FPS, 1.0/100.0)}
-		default:
-			log.Fatalf("Unknown layer.Ks.O.K type %T: %v", v, v)
+	fps := lastAnim.GetFPS()
+	tr := layer.GetTransform()
+	if tr == nil {
+		return
+	}
+	if o := tr.OpacityKeys(); o != nil {
+		var keys []*f.KeyNode
+		// var lastEnd float64
+		for _, v := range o.Values {
+			keys = append(keys, &f.KeyNode{
+				InterpolatorType: itp(f.InterpolatorType1),
+				Time:             fp(v.GetStartTime() / fps),
+				Value:            fp(v.GetStartValue() / 100.0),
+			})
+			// lastEnd = v.EndTime
 		}
+		keyed.Opacity = [][]*f.KeyNode{keys}
 	}
 
 	lastAnim.Keyed = append(lastAnim.Keyed, keyed)
@@ -291,6 +298,10 @@ func bmp(v f.BlendModeType) *f.BlendModeType {
 
 func bp(v bool) *bool {
 	return &v
+}
+
+func cp(v [4]float64) *f.Color {
+	return &f.Color{v[0], v[1], v[2], v[3]}
 }
 
 func fp(v float64) *float64 {

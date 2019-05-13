@@ -1,3 +1,6 @@
+//go:generate go run ../lottie/gen-accessors.go
+
+// Package flare provides read/write access to JSON flare files.
 package flare
 
 import (

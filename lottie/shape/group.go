@@ -17,13 +17,13 @@ type GroupT struct {
 	Shapes []json.RawMessage `json:"it,omitempty"`
 
 	// After Effect's Match Name. Used for expressions.
-	Mn *string `json:"mn,omitempty"`
+	MatchName *string `json:"mn,omitempty"`
 
 	// After Effect's Name. Used for expressions.
-	Nm *string `json:"nm,omitempty"`
+	Name *string `json:"nm,omitempty"`
 
 	// Group number of properties. Used for expressions.
-	Np *float64 `json:"np,omitempty"`
+	NumProperties *int `json:"np,omitempty"`
 
 	// Shape content type.
 	Ty *string `json:"ty,omitempty"`

@@ -6,6 +6,8 @@ package layer
 import (
 	"encoding/json"
 	"log"
+
+	"github.com/gmlewis/lottie2flare/lottie/helpers"
 )
 
 // Type identifies the type of lottie layer.
@@ -24,6 +26,10 @@ const (
 
 // Layer represents a lottie layer.
 type Layer interface {
+	// GetTransform returns the shape's transform.
+	GetTransform() *helpers.Transform
+
+	// Type returns the layer's type.
 	Type() Type
 }
 

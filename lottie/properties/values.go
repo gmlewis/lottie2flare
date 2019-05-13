@@ -2,7 +2,6 @@ package properties
 
 import (
 	"encoding/json"
-	"log"
 )
 
 // Value represents a property value.
@@ -23,10 +22,10 @@ type ValueKeyframe struct {
 	In *In `json:"i,omitempty"`
 
 	// Start value of keyframe segment.
-	S *float64 `json:"s,omitempty"`
+	StartValue *float64 `json:"s,omitempty"`
 
 	// Start time of keyframe segment.
-	T *float64 `json:"t,omitempty"`
+	StartTime *float64 `json:"t,omitempty"`
 }
 
 // ValueKeyframed represents keyframe values.
@@ -41,15 +40,32 @@ type ValueKeyframed struct {
 	Expression *string `json:"x,omitempty"`
 }
 
-// ValueOrValueKeyframed returns either a Value or a ValueKeyframed.
-func ValueOrValueKeyframed(buf json.RawMessage) (*Value, *ValueKeyframed) {
+// GetValue returns a Value if it exists.
+func GetValue(buf json.RawMessage) (*Value, error) {
 	v := &Value{}
 	if err := json.Unmarshal(buf, v); err != nil {
-		log.Fatalf("unmarshal %s: %v", buf, v)
+		return nil, err
 	}
+	return v, nil
+}
+
+// GetValueKeyframed returns a ValueKeyframed if it exists.
+func GetValueKeyframed(buf json.RawMessage) (*ValueKeyframed, error) {
 	vk := &ValueKeyframed{}
 	if err := json.Unmarshal(buf, vk); err != nil {
-		log.Fatalf("unmarshal %s: %v", buf, v)
+		return nil, err
 	}
-	return v, vk
+	return vk, nil
+}
+
+// ValueOrValueKeyframed returns either a Value or a ValueKeyframed.
+func ValueOrValueKeyframed(buf json.RawMessage) (*Value, *ValueKeyframed) {
+	if v, err := GetValue(buf); err != nil {
+		return v, nil
+	}
+	vk, err := GetValueKeyframed(buf)
+	if err != nil {
+		return nil, nil
+	}
+	return nil, vk
 }

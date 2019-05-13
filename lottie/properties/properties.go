@@ -1,3 +1,5 @@
+//go:generate go run ../gen-accessors.go
+
 // Package properties represents properties in lottie files.
 package properties
 
