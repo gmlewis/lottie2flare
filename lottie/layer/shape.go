@@ -53,7 +53,7 @@ type ShapeT struct {
 	InPoint *int `json:"ip,omitempty"`
 
 	// Shape list of items.
-	Shapes []json.RawMessage `json:"it,omitempty"`
+	Shapes []json.RawMessage `json:"shapes,omitempty"`
 
 	// Transform properties
 	Transform *helpers.Transform `json:"ks,omitempty"`

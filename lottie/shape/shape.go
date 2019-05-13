@@ -58,7 +58,7 @@ func (s *ShapeT) Type() Type {
 
 // New uses reflection to return a Shape.
 func New(buf json.RawMessage) Shape {
-	v := &struct{ Ty int }{}
+	v := &struct{ Ty string }{}
 	if err := json.Unmarshal(buf, v); err != nil {
 		log.Fatalf("invalid shape: %s", buf)
 	}

@@ -59,27 +59,47 @@ func (t *TransformT) Type() Type {
 // InitialOpacity returns the initial opacity of the transform.
 func (t *TransformT) InitialOpacity() float64 {
 	v, vk := properties.ValueOrValueKeyframed(t.Opacity)
-	log.Printf("shape.Transform: v=%#v, vk=%#v", v, vk)
-	return 0.0
+	if v != nil {
+		return v.GetValue()
+	}
+	if vk == nil || len(vk.Values) == 0 || len(vk.Values[0].StartValues) == 0 {
+		log.Fatalf("Transform.GetOpacity failed: %s", t.Opacity)
+	}
+	return vk.Values[0].StartValues[0]
 }
 
 // InitialRotation returns the initial rotation of the transform.
 func (t *TransformT) InitialRotation() float64 {
 	v, vk := properties.ValueOrValueKeyframed(t.Rotation)
-	log.Printf("shape.Transform: v=%#v, vk=%#v", v, vk)
-	return 0.0
+	if v != nil {
+		return v.GetValue()
+	}
+	if vk == nil || len(vk.Values) == 0 || len(vk.Values[0].StartValues) == 0 {
+		log.Fatalf("Transform.GetRotation failed: %s", t.Rotation)
+	}
+	return vk.Values[0].StartValues[0]
 }
 
 // InitialPosition returns the initial rotation of the transform.
 func (t *TransformT) InitialPosition() []float64 {
 	md, mdk := properties.MultiDimensionalOrMultiDimensionalKeyframed(t.Position)
-	log.Printf("shape.Transform: md=%#v, mdk=%#v", md, mdk)
-	return []float64{1, 1}
+	if md != nil {
+		return md.Value
+	}
+	if mdk == nil || len(mdk.Keyframes) == 0 {
+		log.Fatalf("TransformT.InitialPosition failed: %s", t.Position)
+	}
+	return mdk.Keyframes[0].StartValue
 }
 
 // InitialScale returns the initial rotation of the transform.
 func (t *TransformT) InitialScale() []float64 {
 	md, mdk := properties.MultiDimensionalOrMultiDimensionalKeyframed(t.Scale)
-	log.Printf("shape.Transform: md=%#v, mdk=%#v", md, mdk)
-	return []float64{1, 1}
+	if md != nil {
+		return md.Value
+	}
+	if mdk == nil || len(mdk.Keyframes) == 0 {
+		log.Fatalf("TransformT.InitialScale failed: %s", t.Scale)
+	}
+	return mdk.Keyframes[0].StartValue
 }

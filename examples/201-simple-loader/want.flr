@@ -112,7 +112,7 @@
           "isCollapsed": false,
           "isVisible": true,
           "name": "Shape Layer 3",
-          "opacity": 1,
+          "opacity": 0,
           "rotation": 0,
           "scale": [
             1,
@@ -163,7 +163,7 @@
           "isCollapsed": false,
           "isVisible": true,
           "name": "Shape Layer 1",
-          "opacity": 1,
+          "opacity": 0,
           "rotation": 0,
           "scale": [
             1,
@@ -214,7 +214,7 @@
           "isCollapsed": false,
           "isVisible": true,
           "name": "Shape Layer 2",
-          "opacity": 1,
+          "opacity": 0,
           "rotation": 0,
           "scale": [
             1,

@@ -90,20 +90,20 @@ func (v *ValueKeyframe) GetIn() *In {
 	return v.In
 }
 
+// GetOut returns the Out field.
+func (v *ValueKeyframe) GetOut() *Out {
+	if v == nil {
+		return nil
+	}
+	return v.Out
+}
+
 // GetStartTime returns the StartTime field if it's non-nil, zero value otherwise.
 func (v *ValueKeyframe) GetStartTime() float64 {
 	if v == nil || v.StartTime == nil {
 		return 0.0
 	}
 	return *v.StartTime
-}
-
-// GetStartValue returns the StartValue field if it's non-nil, zero value otherwise.
-func (v *ValueKeyframe) GetStartValue() float64 {
-	if v == nil || v.StartValue == nil {
-		return 0.0
-	}
-	return *v.StartValue
 }
 
 // GetExpression returns the Expression field if it's non-nil, zero value otherwise.

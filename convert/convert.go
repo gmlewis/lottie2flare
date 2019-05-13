@@ -58,6 +58,7 @@ func processLayer(parentIndex int, layer lottie.Layer, ab *f.Artboard) {
 
 func processLayerShape(parentIndex int, layer ll.Shape, ab *f.Artboard) {
 	xfrm := layer.GetTransform()
+	scale := xfrm.InitialScale()
 	n := &f.Node{
 		BlendMode:   bmp(f.BlendModeType3),
 		Clips:       &[]int{},
@@ -67,8 +68,8 @@ func processLayerShape(parentIndex int, layer ll.Shape, ab *f.Artboard) {
 		Name:        sp(layer.GetName()),
 		Opacity:     fp(xfrm.InitialOpacity()),
 		Rotation:    fp(xfrm.InitialRotation()),
-		Scale:       xfrm.InitialScale(),
-		Translation: xfrm.InitialPosition(),
+		Scale:       []float64{scale[0] / 100.0, scale[1] / 100.0},
+		Translation: xfrm.InitialPosition()[0:2],
 		Type:        ntp(f.NodeTypeShape),
 	}
 	if parentIndex >= 0 {
@@ -107,7 +108,7 @@ func processShapeGroup(parentIndex int, shape ls.Group, layer lottie.Layer, ab *
 			Color:    cp(fill.GetColor()),
 			FillRule: ip(1),
 			Name:     sp(fill.GetName()),
-			Opacity:  fp(fill.GetOpacity()),
+			Opacity:  fp(fill.GetOpacity() / 100.0),
 			Parent:   ip(parentIndex),
 			Type:     ntp(f.NodeTypeColorFill),
 		}
@@ -119,22 +120,22 @@ func processShapeGroup(parentIndex int, shape ls.Group, layer lottie.Layer, ab *
 	for _, item := range items[ls.EllipseType] {
 		ellipse := item.(ls.Ellipse)
 		size := ellipse.GetSize()
-		position := ellipse.GetPosition()
 		n := &f.Node{
 			Clips:       &[]int{},
 			Height:      fp(size[1]),
 			IsCollapsed: bp(false),
 			Name:        sp(ellipse.GetName()),
 			Parent:      ip(parentIndex),
-			Translation: position,
+			Translation: ellipse.GetPosition()[0:2],
 			Type:        ntp(f.NodeTypeEllipse),
 			Width:       fp(size[0]),
 		}
 		if len(tr) > 0 {
 			xfrm := tr[0].(ls.Transform)
-			n.Opacity = fp(xfrm.InitialOpacity())
+			n.Opacity = fp(xfrm.InitialOpacity() / 100.0)
 			n.Rotation = fp(xfrm.InitialRotation())
-			n.Scale = xfrm.InitialScale()
+			scale := xfrm.InitialScale()
+			n.Scale = []float64{scale[0] / 100.0, scale[1] / 100.0}
 		}
 		ab.Nodes = append(ab.Nodes, n)
 	}
@@ -153,14 +154,21 @@ func addKeys(componentNum int, layer lottie.Layer, ab *f.Artboard) {
 	}
 	if o := tr.OpacityKeys(); o != nil {
 		var keys []*f.KeyNode
-		// var lastEnd float64
+		var lastEnd float64
 		for _, v := range o.Values {
-			keys = append(keys, &f.KeyNode{
+			key := &f.KeyNode{
 				InterpolatorType: itp(f.InterpolatorType1),
 				Time:             fp(v.GetStartTime() / fps),
-				Value:            fp(v.GetStartValue() / 100.0),
-			})
-			// lastEnd = v.EndTime
+			}
+			if len(v.StartValues) > 0 {
+				key.Value = fp(v.StartValues[0] / 100.0)
+			} else {
+				key.Value = lastEnd
+			}
+			keys = append(keys, key)
+			if len(v.EndValues) > 0 {
+				lastEnd = v.EndValues[0] / 100.0
+			}
 		}
 		keyed.Opacity = [][]*f.KeyNode{keys}
 	}

@@ -2,7 +2,6 @@ package properties
 
 import (
 	"encoding/json"
-	"log"
 )
 
 // MultiDimensional represents a multi-dimensional property value.
@@ -11,7 +10,7 @@ type MultiDimensional struct {
 	Index *int `json:"ix,omitempty"`
 
 	// Property Value
-	Value []json.RawMessage `json:"k,omitempty"`
+	Value []float64 `json:"k,omitempty"`
 
 	// Property Expression. An AE expression that modifies the value.
 	Expression *string `json:"x,omitempty"`
@@ -20,7 +19,6 @@ type MultiDimensional struct {
 // MultiDimensionalKeyframed represents keyframed multi-dimensional property
 // values.
 type MultiDimensionalKeyframed struct {
-
 	// Property Index. Used for expressions.
 	Index *int `json:"ix,omitempty"`
 
@@ -37,16 +35,34 @@ type MultiDimensionalKeyframed struct {
 	Expression *string `json:"x,omitempty"`
 }
 
-// MultiDimensionalOrMultiDimensionalKeyframed returns either a
-// MultiDimensional or a MultiDimensionalKeyframed.
-func MultiDimensionalOrMultiDimensionalKeyframed(buf json.RawMessage) (*MultiDimensional, *MultiDimensionalKeyframed) {
+// GetMultiDimensional returns a MultiDimensional if it exists.
+func GetMultiDimensional(buf json.RawMessage) (*MultiDimensional, error) {
 	v := &MultiDimensional{}
 	if err := json.Unmarshal(buf, v); err != nil {
-		log.Fatalf("unmarshal %s: %v", buf, v)
+		return nil, err
 	}
+	return v, nil
+}
+
+// GetMultiDimensionalKeyframed returns a MultiDimensionalKeyframed if it exists.
+func GetMultiDimensionalKeyframed(buf json.RawMessage) (*MultiDimensionalKeyframed, error) {
 	vk := &MultiDimensionalKeyframed{}
 	if err := json.Unmarshal(buf, vk); err != nil {
-		log.Fatalf("unmarshal %s: %v", buf, v)
+		return nil, err
 	}
-	return v, vk
+	return vk, nil
+}
+
+// MultiDimensionalOrMultiDimensionalKeyframed returns either a MultiDimensional or a MultiDimensionalKeyframed.
+func MultiDimensionalOrMultiDimensionalKeyframed(buf json.RawMessage) (*MultiDimensional, *MultiDimensionalKeyframed) {
+	if v, err := GetMultiDimensional(buf); err == nil {
+		// Success! It's a MultiDimensional.
+		return v, nil
+	}
+	// Not a MultiDimensional. Try a MultiDimensionalKeyframed.
+	vk, err := GetMultiDimensionalKeyframed(buf)
+	if err != nil {
+		return nil, nil
+	}
+	return nil, vk
 }

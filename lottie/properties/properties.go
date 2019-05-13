@@ -6,10 +6,10 @@ package properties
 // In represents a Bezier curve interpolation "in" value.
 type In struct {
 	// bezier x axis
-	X float64 `json:"x,omitempty"`
+	X []float64 `json:"x,omitempty"`
 
 	// bezier y axis
-	Y float64 `json:"y,omitempty"`
+	Y []float64 `json:"y,omitempty"`
 }
 
 // Out represents a Bezier curve interpolation "out" value.

@@ -18,11 +18,20 @@ type Value struct {
 
 // ValueKeyframe represents a keyframe value.
 type ValueKeyframe struct {
+	// End value of keyframe segment.
+	EndValues []float64 `json:"e,omitempty"`
+
 	// Bezier curve interpolation "in" value.
 	In *In `json:"i,omitempty"`
 
-	// Start value of keyframe segment.
-	StartValue *float64 `json:"s,omitempty"`
+	// Names of keyframe.
+	Name []string `json:"n,omitempty"`
+
+	// Bezier curve interpolation "out" value.
+	Out *Out `json:"o,omitempty"`
+
+	// Start values of keyframe segment.
+	StartValues []float64 `json:"s,omitempty"`
 
 	// Start time of keyframe segment.
 	StartTime *float64 `json:"t,omitempty"`
@@ -60,9 +69,11 @@ func GetValueKeyframed(buf json.RawMessage) (*ValueKeyframed, error) {
 
 // ValueOrValueKeyframed returns either a Value or a ValueKeyframed.
 func ValueOrValueKeyframed(buf json.RawMessage) (*Value, *ValueKeyframed) {
-	if v, err := GetValue(buf); err != nil {
+	if v, err := GetValue(buf); err == nil {
+		// Success! It's a value.
 		return v, nil
 	}
+	// Not a Value. Try a ValueKeyframed.
 	vk, err := GetValueKeyframed(buf)
 	if err != nil {
 		return nil, nil

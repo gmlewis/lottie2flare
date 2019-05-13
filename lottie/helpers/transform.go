@@ -42,19 +42,23 @@ type Transform struct {
 	Skew json.RawMessage `json:"sk,omitempty"`
 }
 
-// InitialOpacity returns the initial opacity of the transform.
+// InitialOpacity returns the initial opacity (0-100) of the transform.
 func (t *Transform) InitialOpacity() float64 {
 	v, vk := properties.ValueOrValueKeyframed(t.Opacity)
-	log.Printf("helpers.Transform: v=%#v, vk=%#v", v, vk)
-	return 0.0
+	if v != nil {
+		return v.GetValue()
+	}
+	if vk == nil || len(vk.Values) == 0 || len(vk.Values[0].StartValues) == 0 {
+		log.Fatalf("InitialOpacity failed: %s", t.Opacity)
+	}
+	return vk.Values[0].StartValues[0]
 }
 
 // OpacityKeys returns the opacity keys of the transform.
 func (t *Transform) OpacityKeys() *properties.ValueKeyframed {
 	vk, err := properties.GetValueKeyframed(t.Opacity)
 	if err != nil {
-		log.Printf("WARNING: expected OpacityKeys from %s", t.Opacity)
-		return nil
+		log.Fatalf("OpacityKeys failed: %s", t.Opacity)
 	}
 	return vk
 }
@@ -62,20 +66,35 @@ func (t *Transform) OpacityKeys() *properties.ValueKeyframed {
 // InitialRotation returns the initial rotation of the transform.
 func (t *Transform) InitialRotation() float64 {
 	v, vk := properties.ValueOrValueKeyframed(t.Rotation)
-	log.Printf("helpers.Transform: v=%#v, vk=%#v", v, vk)
-	return 0.0
+	if v != nil {
+		return v.GetValue()
+	}
+	if vk == nil || len(vk.Values) == 0 || len(vk.Values[0].StartValues) == 0 {
+		log.Fatalf("InitialRotation failed: %s", t.Rotation)
+	}
+	return vk.Values[0].StartValues[0]
 }
 
 // InitialPosition returns the initial rotation of the transform.
 func (t *Transform) InitialPosition() []float64 {
 	md, mdk := properties.MultiDimensionalOrMultiDimensionalKeyframed(t.Position)
-	log.Printf("helpers.Transform: md=%#v, mdk=%#v", md, mdk)
-	return []float64{1, 1}
+	if md != nil {
+		return md.Value
+	}
+	if mdk == nil || len(mdk.Keyframes) == 0 {
+		log.Fatalf("InitialPosition failed: %s", t.Position)
+	}
+	return mdk.Keyframes[0].StartValue
 }
 
-// InitialScale returns the initial rotation of the transform.
+// InitialScale returns the initial scale of the transform.
 func (t *Transform) InitialScale() []float64 {
 	md, mdk := properties.MultiDimensionalOrMultiDimensionalKeyframed(t.Scale)
-	log.Printf("helpers.Transform: md=%#v, mdk=%#v", md, mdk)
-	return []float64{1, 1}
+	if md != nil {
+		return md.Value
+	}
+	if mdk == nil || len(mdk.Keyframes) == 0 {
+		log.Fatalf("InitialScale failed: %s", t.Scale)
+	}
+	return mdk.Keyframes[0].StartValue
 }

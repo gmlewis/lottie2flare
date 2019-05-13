@@ -51,13 +51,23 @@ func (e *EllipseT) Type() Type {
 // GetPosition returns the initial rotation of the transform.
 func (e *EllipseT) GetPosition() []float64 {
 	md, mdk := properties.MultiDimensionalOrMultiDimensionalKeyframed(e.Position)
-	log.Printf("md=%#v, mdk=%#v", md, mdk)
-	return []float64{1, 1}
+	if md != nil {
+		return md.Value
+	}
+	if mdk == nil || len(mdk.Keyframes) == 0 {
+		log.Fatalf("EllipseT.GetPosition failed: %s", e.Position)
+	}
+	return mdk.Keyframes[0].StartValue
 }
 
 // GetSize returns the initial rotation of the transform.
 func (e *EllipseT) GetSize() []float64 {
 	md, mdk := properties.MultiDimensionalOrMultiDimensionalKeyframed(e.Size)
-	log.Printf("md=%#v, mdk=%#v", md, mdk)
-	return []float64{1, 1}
+	if md != nil {
+		return md.Value
+	}
+	if mdk == nil || len(mdk.Keyframes) == 0 {
+		log.Fatalf("EllipseT.GetSize failed: %s", e.Size)
+	}
+	return mdk.Keyframes[0].StartValue
 }

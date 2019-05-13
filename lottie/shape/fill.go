@@ -48,13 +48,25 @@ func (f *FillT) Type() Type {
 // GetColor returns an RGBA color (0-1).
 func (f *FillT) GetColor() (color [4]float64) {
 	md, mdk := properties.MultiDimensionalOrMultiDimensionalKeyframed(f.Color)
-	log.Printf("FillT.GetColor: md=%#v, mdk=%#v", md, mdk)
-	return color
+	if md != nil && len(md.Value) >= 4 {
+		v := md.Value
+		return [4]float64{v[0], v[1], v[2], v[3]}
+	}
+	if mdk == nil || len(mdk.Keyframes) == 0 {
+		log.Fatalf("FillT.GetColor failed: %s", f.Color)
+	}
+	v := mdk.Keyframes[0].StartValue
+	return [4]float64{v[0], v[1], v[2], v[3]}
 }
 
 // GetOpacity returns the initial opacity of the transform.
 func (f *FillT) GetOpacity() float64 {
 	v, vk := properties.ValueOrValueKeyframed(f.Opacity)
-	log.Printf("v=%#v, vk=%#v", v, vk)
-	return 0.0
+	if v != nil {
+		return v.GetValue()
+	}
+	if vk == nil || len(vk.Values) == 0 || len(vk.Values[0].StartValues) == 0 {
+		log.Fatalf("FillT.GetOpacity failed: %s", f.Opacity)
+	}
+	return vk.Values[0].StartValues[0]
 }
