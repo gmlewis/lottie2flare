@@ -7,9 +7,12 @@ to [Flutter](https://flutter.dev) [flare](https://2dimensions.com/flare) files.
 It is currently a work-in-progress.
 Only an infinitesimal subset of simple animations are currently supported.
 
-Note that there is a [blocking issue](https://github.com/2d-inc/Flare-Flutter/issues/90)
+Note that there is a [known issue](https://github.com/2d-inc/Flare-Flutter/issues/90)
 in the `flare_flutter` plugin that causes it to crash when the JSON keys are
 in sorted order (which is the default for [json.Marshal](https://golang.org/pkg/encoding/json/#Marshal)).
+I therefore wrote [flare-bug-workaround](cmd/flare-bug-workaround) as a temporary fix.
+
+![201-simple-loader](examples/201-simple-loader/201-simple-loader.gif)
 
 ## Examples
 
