@@ -58,7 +58,7 @@ func (t *Transform) InitialOpacity() float64 {
 func (t *Transform) OpacityKeys() *properties.ValueKeyframed {
 	vk, err := properties.GetValueKeyframed(t.Opacity)
 	if err != nil {
-		log.Fatalf("OpacityKeys failed: %s", t.Opacity)
+		return nil
 	}
 	return vk
 }

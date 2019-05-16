@@ -6,6 +6,11 @@ import (
 	"github.com/gmlewis/lottie2flare/lottie/helpers"
 )
 
+const (
+	// PreCompType is a lottie preComp layer.
+	PreCompType Type = 0
+)
+
 // PreComp represents a lottie preComp layer.
 type PreComp interface {
 	// GetTransform returns the shape's transform.
@@ -39,7 +44,7 @@ type PreCompT struct {
 	Index *int `json:"ind,omitempty"`
 
 	// In Point of layer. Sets the initial frame of the layer.
-	InPoint *int `json:"ip,omitempty"`
+	InPoint *float64 `json:"ip,omitempty"`
 
 	// Transform properties
 	Transform *helpers.Transform `json:"ks,omitempty"`
@@ -54,7 +59,7 @@ type PreCompT struct {
 	Name *string `json:"nm,omitempty"`
 
 	// Out Point of layer. Sets the final frame of the layer.
-	OutPoint *int `json:"op,omitempty"`
+	OutPoint *float64 `json:"op,omitempty"`
 
 	// Layer Parent. Uses ind of parent.
 	Parent *int `json:"parent,omitempty"`

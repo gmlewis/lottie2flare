@@ -1,5 +1,10 @@
 package shape
 
+const (
+	// RepeaterType represents a lottie shape/repeater.
+	RepeaterType Type = "rp"
+)
+
 // Repeater represents a lottie shape/repeater.
 type Repeater interface {
 	Type() Type

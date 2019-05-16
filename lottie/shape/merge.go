@@ -1,5 +1,10 @@
 package shape
 
+const (
+	// MergeType represents a lottie shape/merge.
+	MergeType Type = "mm"
+)
+
 // Merge represents a lottie shape/merge.
 type Merge interface {
 	Type() Type

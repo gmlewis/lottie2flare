@@ -7,6 +7,11 @@ import (
 	"github.com/gmlewis/lottie2flare/lottie/properties"
 )
 
+const (
+	// TransformType represents a lottie transform.
+	TransformType Type = "tr"
+)
+
 // Transform represents a lottie shape/transform.
 type Transform interface {
 	InitialOpacity() float64

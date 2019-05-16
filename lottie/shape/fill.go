@@ -7,6 +7,11 @@ import (
 	"github.com/gmlewis/lottie2flare/lottie/properties"
 )
 
+const (
+	// FillType represents a lottie shape/fill.
+	FillType Type = "fl"
+)
+
 // Fill represents a lottie shape/fill.
 type Fill interface {
 	// GetColor returns an RGBA color (0-1).

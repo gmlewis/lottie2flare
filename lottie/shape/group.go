@@ -2,6 +2,11 @@ package shape
 
 import "encoding/json"
 
+const (
+	// GroupType represents a lottie shape/group.
+	GroupType Type = "gr"
+)
+
 // Group represents a lottie shape/group.
 type Group interface {
 	// GetShapes returns the shapes in the group.

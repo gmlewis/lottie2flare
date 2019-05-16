@@ -1,5 +1,10 @@
 package shape
 
+const (
+	// TrimType represents a lottie shape/trim.
+	TrimType Type = "tm"
+)
+
 // Trim represents a lottie shape/trim.
 type Trim interface {
 	Type() Type

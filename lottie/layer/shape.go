@@ -7,6 +7,11 @@ import (
 	ls "github.com/gmlewis/lottie2flare/lottie/shape"
 )
 
+const (
+	// ShapeType is a lottie shape layer.
+	ShapeType Type = 4
+)
+
 // Shape represents a lottie shape layer.
 type Shape interface {
 	// GetIndex returns the shape index.
@@ -50,7 +55,7 @@ type ShapeT struct {
 	Index *int `json:"ind,omitempty"`
 
 	// In Point of layer. Sets the initial frame of the layer.
-	InPoint *int `json:"ip,omitempty"`
+	InPoint *float64 `json:"ip,omitempty"`
 
 	// Shape list of items.
 	Shapes []json.RawMessage `json:"shapes,omitempty"`
@@ -68,7 +73,7 @@ type ShapeT struct {
 	Name *string `json:"nm,omitempty"`
 
 	// Out Point of layer. Sets the final frame of the layer.
-	OutPoint *int `json:"op,omitempty"`
+	OutPoint *float64 `json:"op,omitempty"`
 
 	// Layer Parent. Uses ind of parent.
 	Parent *int `json:"parent,omitempty"`

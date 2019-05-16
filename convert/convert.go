@@ -2,12 +2,8 @@
 package convert
 
 import (
-	"log"
-
 	f "github.com/gmlewis/lottie2flare/flare"
 	"github.com/gmlewis/lottie2flare/lottie"
-	ll "github.com/gmlewis/lottie2flare/lottie/layer"
-	ls "github.com/gmlewis/lottie2flare/lottie/shape"
 )
 
 // Lottie2Flare converts a lottie animation to a flare root.
@@ -44,136 +40,6 @@ func Lottie2Flare(anim *lottie.Animation) (*f.Root, error) {
 	}
 
 	return root, nil
-}
-
-func processLayer(parentIndex int, layer lottie.Layer, ab *f.Artboard) {
-	switch layer.Type() {
-	case ll.ShapeType:
-		v := layer.(ll.Shape)
-		processLayerShape(parentIndex, v, ab)
-	default:
-		log.Fatalf("Lottie shape type %v not yet supported.", layer.Type())
-	}
-}
-
-func processLayerShape(parentIndex int, layer ll.Shape, ab *f.Artboard) {
-	xfrm := layer.GetTransform()
-	scale := xfrm.InitialScale()
-	n := &f.Node{
-		BlendMode:   bmp(f.BlendModeType3),
-		Clips:       &[]int{},
-		DrawOrder:   ip(layer.GetIndex()),
-		IsCollapsed: bp(false),
-		IsVisible:   bp(true),
-		Name:        sp(layer.GetName()),
-		Opacity:     fp(xfrm.InitialOpacity()),
-		Rotation:    fp(xfrm.InitialRotation()),
-		Scale:       []float64{scale[0] / 100.0, scale[1] / 100.0},
-		Translation: xfrm.InitialPosition()[0:2],
-		Type:        ntp(f.NodeTypeShape),
-	}
-	if parentIndex >= 0 {
-		n.Parent = ip(parentIndex)
-	}
-	nodeNum := len(ab.Nodes)
-	ab.Nodes = append(ab.Nodes, n)
-
-	for _, shape := range layer.GetShapes() {
-		switch shape.Type() {
-		case ls.GroupType:
-			v := shape.(ls.Group)
-			processShapeGroup(nodeNum, v, layer, ab)
-		default:
-			log.Fatalf("lottie shape type %q not yet supported", shape.Type())
-		}
-	}
-
-	addKeys(nodeNum, layer, ab)
-}
-
-func processShapeGroup(parentIndex int, shape ls.Group, layer lottie.Layer, ab *f.Artboard) {
-	items := map[ls.Type][]ls.Shape{}
-	for _, item := range shape.GetShapes() {
-		ty := item.Type()
-		items[ty] = append(items[ty], item)
-		if ty != ls.FillType && ty != ls.TransformType && ty != ls.EllipseType {
-			log.Printf("WARNING Shape type %q not yet supported. Ignoring.", ty)
-		}
-	}
-
-	// Process fills
-	for _, item := range items[ls.FillType] {
-		fill := item.(ls.Fill)
-		n := &f.Node{
-			Color:    cp(fill.GetColor()),
-			FillRule: ip(1),
-			Name:     sp(fill.GetName()),
-			Opacity:  fp(fill.GetOpacity() / 100.0),
-			Parent:   ip(parentIndex),
-			Type:     ntp(f.NodeTypeColorFill),
-		}
-		ab.Nodes = append(ab.Nodes, n)
-	}
-
-	tr := items[ls.TransformType]
-	// Process ellipses
-	for _, item := range items[ls.EllipseType] {
-		ellipse := item.(ls.Ellipse)
-		size := ellipse.GetSize()
-		n := &f.Node{
-			Clips:       &[]int{},
-			Height:      fp(size[1]),
-			IsCollapsed: bp(false),
-			Name:        sp(ellipse.GetName()),
-			Parent:      ip(parentIndex),
-			Translation: ellipse.GetPosition()[0:2],
-			Type:        ntp(f.NodeTypeEllipse),
-			Width:       fp(size[0]),
-		}
-		if len(tr) > 0 {
-			xfrm := tr[0].(ls.Transform)
-			n.Opacity = fp(xfrm.InitialOpacity() / 100.0)
-			n.Rotation = fp(xfrm.InitialRotation())
-			scale := xfrm.InitialScale()
-			n.Scale = []float64{scale[0] / 100.0, scale[1] / 100.0}
-		}
-		ab.Nodes = append(ab.Nodes, n)
-	}
-}
-
-func addKeys(componentNum int, layer lottie.Layer, ab *f.Artboard) {
-	lastAnim := ab.Animations[len(ab.Animations)-1]
-	keyed := &f.Key{
-		Component: ip(componentNum),
-	}
-
-	fps := lastAnim.GetFPS()
-	tr := layer.GetTransform()
-	if tr == nil {
-		return
-	}
-	if o := tr.OpacityKeys(); o != nil {
-		var keys []*f.KeyNode
-		var lastEnd float64
-		for _, v := range o.Values {
-			key := &f.KeyNode{
-				InterpolatorType: itp(f.InterpolatorType1),
-				Time:             fp(v.GetStartTime() / fps),
-			}
-			if len(v.StartValues) > 0 {
-				key.Value = fp(v.StartValues[0] / 100.0)
-			} else {
-				key.Value = lastEnd
-			}
-			keys = append(keys, key)
-			if len(v.EndValues) > 0 {
-				lastEnd = v.EndValues[0] / 100.0
-			}
-		}
-		keyed.Opacity = [][]*f.KeyNode{keys}
-	}
-
-	lastAnim.Keyed = append(lastAnim.Keyed, keyed)
 }
 
 /*

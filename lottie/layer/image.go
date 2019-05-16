@@ -6,6 +6,11 @@ import (
 	"github.com/gmlewis/lottie2flare/lottie/helpers"
 )
 
+const (
+	// ImageType is a lottie image layer.
+	ImageType Type = 2
+)
+
 // Image represents a lottie image layer.
 type Image interface {
 	Type() Type
@@ -36,7 +41,7 @@ type ImageT struct {
 	Inded *int `json:"ind,omitempty"`
 
 	// In Point of layer. Sets the initial frame of the layer.
-	InPoint *int `json:"ip,omitempty"`
+	InPoint *float64 `json:"ip,omitempty"`
 
 	// Transform properties
 	Transform *helpers.Transform `json:"ks,omitempty"`
@@ -51,7 +56,7 @@ type ImageT struct {
 	Name *string `json:"nm,omitempty"`
 
 	// Out Point of layer. Sets the final frame of the layer.
-	OutPoint *int `json:"op,omitempty"`
+	OutPoint *float64 `json:"op,omitempty"`
 
 	// Layer Parent. Uses ind of parent.
 	Parent *int `json:"parent,omitempty"`

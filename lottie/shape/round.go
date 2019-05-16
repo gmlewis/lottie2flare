@@ -1,5 +1,10 @@
 package shape
 
+const (
+	// RoundType represents a lottie shape/round.
+	RoundType Type = "rd"
+)
+
 // Round represents a lottie shape/round.
 type Round interface {
 	Type() Type

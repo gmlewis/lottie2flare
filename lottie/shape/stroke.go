@@ -1,5 +1,10 @@
 package shape
 
+const (
+	// StrokeType represents a lottie shape/stroke.
+	StrokeType Type = "st"
+)
+
 // Stroke represents a lottie shape/stroke.
 type Stroke interface {
 	Type() Type

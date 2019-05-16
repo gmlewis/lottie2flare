@@ -7,6 +7,11 @@ import (
 	"github.com/gmlewis/lottie2flare/lottie/properties"
 )
 
+const (
+	// EllipseType represents a lottie shape/ellipse.
+	EllipseType Type = "el"
+)
+
 // Ellipse represents a lottie shape/ellipse.
 type Ellipse interface {
 	// GetName gets the shape's name.

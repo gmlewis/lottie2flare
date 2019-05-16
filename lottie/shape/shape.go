@@ -12,34 +12,8 @@ import (
 type Type string
 
 const (
-	// EllipseType represents a lottie shape/ellipse.
-	EllipseType Type = "el"
-	// FillType represents a lottie shape/fill.
-	FillType Type = "fl"
-	// GFillType represents a lottie shape/gFill.
-	GFillType Type = "gf"
-	// GroupType represents a lottie shape/group.
-	GroupType Type = "gr"
-	// GStrokeType represents a lottie shape/gStroke.
-	GStrokeType Type = "gs"
-	// MergeType represents a lottie shape/merge.
-	MergeType Type = "mm"
-	// RectType represents a lottie shape/rect.
-	RectType Type = "rc"
-	// RepeaterType represents a lottie shape/repeater.
-	RepeaterType Type = "rp"
-	// RoundType represents a lottie shape/round.
-	RoundType Type = "rd"
 	// ShapeType represents a lottie shape/shape.
 	ShapeType Type = "sh"
-	// StarType represents a lottie shape/star.
-	StarType Type = "sr"
-	// StrokeType represents a lottie shape/stroke.
-	StrokeType Type = "st"
-	// TrimType represents a lottie shape/trim.
-	TrimType Type = "tm"
-	// TransformType represents a lottie transform.
-	TransformType Type = "tr"
 )
 
 // Shape represents a lottie shape/shape.

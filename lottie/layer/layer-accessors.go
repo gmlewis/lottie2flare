@@ -51,9 +51,9 @@ func (i *ImageT) GetInded() int {
 }
 
 // GetInPoint returns the InPoint field if it's non-nil, zero value otherwise.
-func (i *ImageT) GetInPoint() int {
+func (i *ImageT) GetInPoint() float64 {
 	if i == nil || i.InPoint == nil {
-		return 0
+		return 0.0
 	}
 	return *i.InPoint
 }
@@ -75,9 +75,9 @@ func (i *ImageT) GetName() string {
 }
 
 // GetOutPoint returns the OutPoint field if it's non-nil, zero value otherwise.
-func (i *ImageT) GetOutPoint() int {
+func (i *ImageT) GetOutPoint() float64 {
 	if i == nil || i.OutPoint == nil {
-		return 0
+		return 0.0
 	}
 	return *i.OutPoint
 }
@@ -147,9 +147,9 @@ func (n *NullT) GetInd() int {
 }
 
 // GetInPoint returns the InPoint field if it's non-nil, zero value otherwise.
-func (n *NullT) GetInPoint() int {
+func (n *NullT) GetInPoint() float64 {
 	if n == nil || n.InPoint == nil {
-		return 0
+		return 0.0
 	}
 	return *n.InPoint
 }
@@ -171,9 +171,9 @@ func (n *NullT) GetName() float64 {
 }
 
 // GetOutPoint returns the OutPoint field if it's non-nil, zero value otherwise.
-func (n *NullT) GetOutPoint() int {
+func (n *NullT) GetOutPoint() float64 {
 	if n == nil || n.OutPoint == nil {
-		return 0
+		return 0.0
 	}
 	return *n.OutPoint
 }
@@ -251,9 +251,9 @@ func (p *PreCompT) GetIndex() int {
 }
 
 // GetInPoint returns the InPoint field if it's non-nil, zero value otherwise.
-func (p *PreCompT) GetInPoint() int {
+func (p *PreCompT) GetInPoint() float64 {
 	if p == nil || p.InPoint == nil {
-		return 0
+		return 0.0
 	}
 	return *p.InPoint
 }
@@ -275,9 +275,9 @@ func (p *PreCompT) GetName() string {
 }
 
 // GetOutPoint returns the OutPoint field if it's non-nil, zero value otherwise.
-func (p *PreCompT) GetOutPoint() int {
+func (p *PreCompT) GetOutPoint() float64 {
 	if p == nil || p.OutPoint == nil {
-		return 0
+		return 0.0
 	}
 	return *p.OutPoint
 }
@@ -371,9 +371,9 @@ func (s *ShapeT) GetIndex() int {
 }
 
 // GetInPoint returns the InPoint field if it's non-nil, zero value otherwise.
-func (s *ShapeT) GetInPoint() int {
+func (s *ShapeT) GetInPoint() float64 {
 	if s == nil || s.InPoint == nil {
-		return 0
+		return 0.0
 	}
 	return *s.InPoint
 }
@@ -395,9 +395,9 @@ func (s *ShapeT) GetName() string {
 }
 
 // GetOutPoint returns the OutPoint field if it's non-nil, zero value otherwise.
-func (s *ShapeT) GetOutPoint() int {
+func (s *ShapeT) GetOutPoint() float64 {
 	if s == nil || s.OutPoint == nil {
-		return 0
+		return 0.0
 	}
 	return *s.OutPoint
 }

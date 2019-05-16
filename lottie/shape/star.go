@@ -1,5 +1,10 @@
 package shape
 
+const (
+	// StarType represents a lottie shape/star.
+	StarType Type = "sr"
+)
+
 // Star represents a lottie shape/star.
 type Star interface {
 	Type() Type

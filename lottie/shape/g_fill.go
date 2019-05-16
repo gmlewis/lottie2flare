@@ -1,5 +1,10 @@
 package shape
 
+const (
+	// GFillType represents a lottie shape/gFill.
+	GFillType Type = "gf"
+)
+
 // GFill represents a lottie shape/gFill.
 type GFill interface {
 	Type() Type
